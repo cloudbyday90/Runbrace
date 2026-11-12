@@ -6,6 +6,7 @@ import {isDeepStrictEqual} from 'node:util';
 import Ajv2020 from 'ajv/dist/2020.js';
 import addFormats from 'ajv-formats';
 import {parseBytes, LIMITS, Refusal} from './parse.mjs';
+import {readInput} from './read-input.mjs';
 
 export const HERE = path.dirname(fileURLToPath(import.meta.url));
 export const sha = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -78,9 +79,7 @@ export function loadReviewed(root = DEFAULT_ROOT) {
   const raw = new Map(), inputs = new Map(), schemas = new Map();
   for (const entry of [...manifest.schemas, ...manifest.inputs]) {
     const file = safePath(root, entry.path);
-    if (!fs.statSync(file).isFile() || fs.statSync(file).size > LIMITS.bytes)
-      throw new Refusal('input_bytes_limit');
-    const buffer = fs.readFileSync(file); bytes += buffer.length;
+    const buffer = readInput(file); bytes += buffer.length;
     if (bytes > LIMITS.totalBytes) throw new Refusal('total_bytes_limit');
     if (sha(buffer) !== entry.sha256) throw new Refusal('reviewed_input_changed');
     raw.set(entry.path, buffer);
@@ -93,7 +92,7 @@ export function loadReviewed(root = DEFAULT_ROOT) {
   }
   return {root, manifest, raw, inputs, schemas, assertUnchanged() {
     for (const [relative, before] of raw) {
-      const now = fs.readFileSync(safePath(root, relative));
+      const now = readInput(safePath(root, relative));
       if (!before.equals(now)) throw new Refusal('source_bytes_changed');
     }
   }};

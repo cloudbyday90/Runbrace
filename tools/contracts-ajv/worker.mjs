@@ -6,6 +6,7 @@ import {loadReviewed, compileReviewed, validateBytes, makeAjv, TYPE_EXCEPTIONS,
   STATUS_ID, RESULT_ID, HERE, DEFAULT_ROOT, sha, OPTIONS} from './registry.mjs';
 import {buildFixtures} from './fixtures.mjs';
 import {LIMITS, Refusal} from './parse.mjs';
+import {readInput} from './read-input.mjs';
 
 const require = createRequire(import.meta.url);
 const code = status => ({valid: 0, invalid: 1, error: 2, unsafe: 3, unsupported: 3})[status] ?? 2;
@@ -26,7 +27,7 @@ function reportBase(loaded) {
     manifestSha256: sha(fs.readFileSync(path.join(HERE, 'manifest.json'))),
     lockSha256: sha(fs.readFileSync(path.join(HERE, 'package-lock.json'))),
     tooling: ['package.json', 'parse.mjs', 'registry.mjs', 'fixtures.mjs', 'cli.mjs',
-      'watchdog.mjs', 'worker.mjs', 'differential.py', 'test/contracts.test.mjs', 'python-requirements.lock']
+      'watchdog.mjs', 'worker.mjs', 'read-input.mjs', 'differential.py', 'test/contracts.test.mjs', 'test/read-input.test.mjs', 'python-requirements.lock', 'requirements.txt']
       .map(file => ({path: file, sha256: sha(fs.readFileSync(path.join(HERE, file)))})),
     options: OPTIONS, limits: {...LIMITS, wallTimeMs: 40000, workerHeapMiB: 128, outputBytes: 1048576},
     schemas: loaded.manifest.schemas, inputs: loaded.manifest.inputs,
@@ -41,11 +42,9 @@ function run() {
   if (options.command === 'check') {
     if (!options.schema || !options.input) throw new Refusal('usage');
     if (!validators.has(options.schema)) return [{status: 'error', code: 'unknown_schema'}, 2];
-    const info = fs.lstatSync(options.input);
-    if (!info.isFile() || info.isSymbolicLink() || info.size > LIMITS.bytes) throw new Refusal('input_file_limit');
-    const raw = fs.readFileSync(options.input);
+    const raw = readInput(options.input, 'input_file_limit');
     const result = validateBytes(validators, options.schema, raw);
-    if (!fs.readFileSync(options.input).equals(raw)) throw new Refusal('source_bytes_changed');
+    if (!readInput(options.input, 'input_file_limit').equals(raw)) throw new Refusal('source_bytes_changed');
     loaded.assertUnchanged();
     return [result, code(result.status)];
   }

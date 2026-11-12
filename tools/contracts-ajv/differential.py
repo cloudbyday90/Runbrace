@@ -4,8 +4,44 @@ import hashlib
 import importlib.metadata
 import importlib.util
 import json
+import os
 from pathlib import Path
+import stat
 import sys
+
+
+def read_bounded(path):
+    """Read one regular descriptor, capped even if its inode grows.
+
+    The checkout is trusted; this does not atomically confine ancestor paths.
+    O_NOFOLLOW is additional protection where supported. Always compare the
+    opened descriptor to a non-symlink pathname, including on Windows.
+    """
+    flags = os.O_RDONLY | getattr(os, "O_BINARY", 0)
+    flags |= getattr(os, "O_NOFOLLOW", 0) | getattr(os, "O_NONBLOCK", 0)
+    fd = os.open(path, flags)
+    try:
+        before = os.fstat(fd)
+        named = os.lstat(path)
+        if (not stat.S_ISREG(before.st_mode) or not stat.S_ISREG(named.st_mode)
+                or not os.path.samestat(before, named) or before.st_size > 65536):
+            raise ValueError("limit")
+        chunks, length = [], 0
+        while length < 65537:
+            chunk = os.read(fd, 65537 - length)
+            if not chunk:
+                break
+            chunks.append(chunk)
+            length += len(chunk)
+        if length > 65536:
+            raise ValueError("limit")
+        after = os.fstat(fd)
+        if (after.st_size != before.st_size or after.st_mtime_ns != before.st_mtime_ns
+                or after.st_ctime_ns != before.st_ctime_ns or length != after.st_size):
+            raise ValueError("changed")
+        return b"".join(chunks)
+    finally:
+        os.close(fd)
 
 
 def run():
@@ -21,7 +57,7 @@ def run():
         relative = entry["path"]
         if ".." in Path(relative).parts or not relative.startswith(("docs/contracts/", "compatibility-runtime/contracts/")):
             raise ValueError("path")
-        data = (root / relative).read_bytes()
+        data = read_bounded(root / relative)
         if len(data) > 65536 or hashlib.sha256(data).hexdigest() != entry["sha256"]:
             raise ValueError("changed")
         schema = json.loads(data)
@@ -63,7 +99,7 @@ def run():
                 domain_status = "invalid"
             domain.append({"name": case["name"], "status": domain_status})
     for relative, data in before.items():
-        if (root / relative).read_bytes() != data:
+        if read_bounded(root / relative) != data:
             raise ValueError("changed")
     return {"status": "pass", "python": sys.version.split()[0],
             "packages": {name: importlib.metadata.version(name) for name in
@@ -71,8 +107,9 @@ def run():
             "schemaChecks": len(schemas), "results": results, "domain": domain}
 
 
-try:
-    print(json.dumps(run(), separators=(",", ":")))
-except Exception:
-    print('{"status":"error","code":"python_validation_failed"}')
-    sys.exit(2)
+if __name__ == "__main__":
+    try:
+        print(json.dumps(run(), separators=(",", ":")))
+    except Exception:
+        print('{"status":"error","code":"python_validation_failed"}')
+        sys.exit(2)

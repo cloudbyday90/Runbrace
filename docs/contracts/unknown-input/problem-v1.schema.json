@@ -1,0 +1,221 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:runbrace:schema:input-problem:1",
+  "title": "Runbrace draft input Problem Details writer profile v1",
+  "description": "Restricted output writer; not a universal RFC 9457 consumer schema. HTTP/body agreement and safe content require application checks.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "type",
+    "title",
+    "status",
+    "code"
+  ],
+  "properties": {
+    "type": {
+      "const": "about:blank"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "not": {
+        "pattern": "[\\u0000-\\u001f\\u007f]"
+      }
+    },
+    "status": {
+      "enum": [
+        400,
+        401,
+        403,
+        409,
+        413,
+        415,
+        422,
+        429,
+        503
+      ]
+    },
+    "code": {
+      "enum": [
+        "input.invalid_json",
+        "input.unauthenticated",
+        "input.source_scope",
+        "input.source_closed",
+        "input.identity_conflict",
+        "input.payload_too_large",
+        "input.unsupported_media",
+        "input.unsupported_encoding",
+        "input.unsupported_schema",
+        "input.invalid_contract",
+        "input.unsafe_retention",
+        "input.unsupported_event_type",
+        "input.backpressure",
+        "input.storage_unavailable",
+        "input.comparison_unavailable"
+      ]
+    },
+    "detail": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "not": {
+        "pattern": "[\\u0000-\\u001f\\u007f]"
+      }
+    },
+    "field_pointer": {
+      "type": "string",
+      "format": "json-pointer",
+      "maxLength": 256,
+      "not": {
+        "pattern": "[\\u0000-\\u001f\\u007f]"
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": 400
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "title": {
+            "const": "Bad Request"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": 401
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "title": {
+            "const": "Unauthorized"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": 403
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "title": {
+            "const": "Forbidden"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": 409
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "title": {
+            "const": "Conflict"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": 413
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "title": {
+            "const": "Content Too Large"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": 415
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "title": {
+            "const": "Unsupported Media Type"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": 422
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "title": {
+            "const": "Unprocessable Content"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": 429
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "title": {
+            "const": "Too Many Requests"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": 503
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "title": {
+            "const": "Service Unavailable"
+          }
+        }
+      }
+    }
+  ]
+}

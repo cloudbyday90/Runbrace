@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:runbrace:schema:observation-envelope:1",
+  "title": "Runbrace draft observation envelope v1",
+  "description": "Proposed restricted structured CloudEvents profile; no implemented endpoint.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "specversion",
+    "id",
+    "source",
+    "type",
+    "datacontenttype",
+    "dataschema",
+    "data"
+  ],
+  "properties": {
+    "specversion": {
+      "const": "1.0"
+    },
+    "id": {
+      "$ref": "urn:runbrace:schema:identity:1#/$defs/opaque_id"
+    },
+    "source": {
+      "$ref": "urn:runbrace:schema:identity:1#/$defs/generation_urn"
+    },
+    "type": {
+      "const": "runbrace.observation.v1"
+    },
+    "datacontenttype": {
+      "const": "application/json"
+    },
+    "dataschema": {
+      "const": "urn:runbrace:schema:observation-data:1"
+    },
+    "time": {
+      "$ref": "#/$defs/timestamp"
+    },
+    "subject": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512
+    },
+    "data": {
+      "$ref": "urn:runbrace:schema:observation-data:1"
+    }
+  },
+  "$defs": {
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]{1,6})?Z$"
+    }
+  }
+}

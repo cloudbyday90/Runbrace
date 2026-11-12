@@ -1,0 +1,23 @@
+{
+  "source": {
+    "instance_id": "019a6670-0000-7000-8000-000000000101",
+    "generation_id": "019a6670-0000-7000-8000-000000000102",
+    "service": "sabnzbd"
+  },
+  "receipt_id": "019a6670-0000-7000-8000-000000000110",
+  "event_id": "019a6670-0000-7000-8000-000000000120",
+  "first_received_at": "2026-11-09T14:00:01Z",
+  "collector_observed_at": "2026-11-09T14:00:00Z",
+  "observation_time_basis": "collector_observed",
+  "adapter_profile": "sabnzbd.history_status_v1",
+  "identity_policy": "sabnzbd.history_snapshot_unkeyed_v1",
+  "collection_scope": {
+    "kind": "history_page",
+    "start": 0,
+    "limit": 100,
+    "traversal_complete": false
+  },
+  "mapping_profile": "sabnzbd.history_status",
+  "mapping_version": "2026-11-09.1",
+  "projection_version": "sabnzbd.history_identity_status_v1"
+}

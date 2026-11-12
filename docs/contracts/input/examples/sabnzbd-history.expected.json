@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "event_id": "019a6670-0000-7000-8000-000000000120",
+  "source": {
+    "instance_id": "019a6670-0000-7000-8000-000000000101",
+    "generation_id": "019a6670-0000-7000-8000-000000000102",
+    "service": "sabnzbd"
+  },
+  "entity": {
+    "kind": "download",
+    "id": "SABnzbd_nzo_example42"
+  },
+  "condition": {
+    "name": "download.failed",
+    "state": "failing",
+    "severity": "error",
+    "message": "SABnzbd reported a failed download.",
+    "native_state": "Failed"
+  },
+  "observed_at": "2026-11-09T14:00:00Z",
+  "received_at": "2026-11-09T14:00:01Z",
+  "attributes": {
+    "runbrace.observation_kind": "snapshot",
+    "runbrace.identity_kind": "unkeyed",
+    "runbrace.time_basis": "collector_observed",
+    "runbrace.mapping_profile": "sabnzbd.history_status",
+    "runbrace.mapping_version": "2026-11-09.1"
+  }
+}

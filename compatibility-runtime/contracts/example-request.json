@@ -1,0 +1,1 @@
+{"version":1,"idempotency_key":"synthetic-example-001","operation":"fixture.scan","ack_generation":2,"arguments":{"records":1000,"mode":"clean"}}

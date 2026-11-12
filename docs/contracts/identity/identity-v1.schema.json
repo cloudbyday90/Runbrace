@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:runbrace:schema:identity:1",
+  "title": "Runbrace draft shared identity definitions v1",
+  "description": "Root is a synthetic resource descriptor; definitions are reused by draft input/output/receipt schemas. Runtime registration and authorization remain separate.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "instance_id",
+    "generation_id",
+    "entity"
+  ],
+  "properties": {
+    "instance_id": {
+      "$ref": "urn:runbrace:schema:identity:1#/$defs/owned_id"
+    },
+    "generation_id": {
+      "$ref": "urn:runbrace:schema:identity:1#/$defs/owned_id"
+    },
+    "entity": {
+      "$ref": "urn:runbrace:schema:identity:1#/$defs/entity"
+    }
+  },
+  "$defs": {
+    "owned_id": {
+      "type": "string",
+      "minLength": 36,
+      "maxLength": 36,
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "opaque_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "not": {
+        "pattern": "[\\u0000-\\u001f\\u007f]"
+      }
+    },
+    "kind": {
+      "type": "string",
+      "maxLength": 64,
+      "pattern": "^[a-z][a-z0-9_]*$",
+      "not": {
+        "pattern": "[\\u0000-\\u001f\\u007f]"
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "instance_id",
+        "generation_id",
+        "service"
+      ],
+      "properties": {
+        "instance_id": {
+          "$ref": "urn:runbrace:schema:identity:1#/$defs/owned_id"
+        },
+        "generation_id": {
+          "$ref": "urn:runbrace:schema:identity:1#/$defs/owned_id"
+        },
+        "service": {
+          "$ref": "urn:runbrace:schema:identity:1#/$defs/kind"
+        }
+      }
+    },
+    "generation_urn": {
+      "type": "string",
+      "minLength": 45,
+      "maxLength": 45,
+      "pattern": "^urn:uuid:[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "entity_component": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "id"
+      ],
+      "properties": {
+        "kind": {
+          "$ref": "urn:runbrace:schema:identity:1#/$defs/kind"
+        },
+        "id": {
+          "$ref": "urn:runbrace:schema:identity:1#/$defs/opaque_id"
+        },
+        "incarnation": {
+          "$ref": "urn:runbrace:schema:identity:1#/$defs/opaque_id"
+        }
+      }
+    },
+    "parents": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 8,
+      "items": {
+        "$ref": "urn:runbrace:schema:identity:1#/$defs/entity_component"
+      }
+    },
+    "entity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "id"
+      ],
+      "properties": {
+        "kind": {
+          "$ref": "urn:runbrace:schema:identity:1#/$defs/kind"
+        },
+        "id": {
+          "$ref": "urn:runbrace:schema:identity:1#/$defs/opaque_id"
+        },
+        "incarnation": {
+          "$ref": "urn:runbrace:schema:identity:1#/$defs/opaque_id"
+        },
+        "parents": {
+          "$ref": "urn:runbrace:schema:identity:1#/$defs/parents"
+        }
+      }
+    }
+  }
+}

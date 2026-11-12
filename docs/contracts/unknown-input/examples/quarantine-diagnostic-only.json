@@ -1,0 +1,45 @@
+{
+  "description": "Synthetic registered native diagnostic-only opt-in; no live projector or release bundle exists.",
+  "source": {
+    "instance_id": "019a6670-0000-7000-8000-000000000401",
+    "generation_id": "019a6670-0000-7000-8000-000000000402",
+    "service": "custom"
+  },
+  "receipt": {
+    "schema_version": 1,
+    "receipt_id": "019a6670-0000-7000-8000-000000000410",
+    "status": "quarantined",
+    "duplicate": false
+  },
+  "input_evidence_kind": "diagnostic_only",
+  "input_availability": "retained",
+  "input_profile": "example.native_envelope_diagnostic_v1",
+  "projection_version": "example.native_diagnostic_v1",
+  "mapping_profile": "example.native_quarantine",
+  "mapping_version": "2026-11-09.1",
+  "processing_count": 0,
+  "input_json": {
+    "schema_version": 1,
+    "classification": "unsupported_native_input",
+    "source_body_retained": false
+  },
+  "quarantine_detail": {
+    "schema_version": 1,
+    "reason_code": "input.unsupported_event_type",
+    "stage": "native_admission",
+    "input_evidence_kind": "diagnostic_only",
+    "affected_item_count": 1,
+    "automatic_retry": false,
+    "recovery_requirement": "source_evidence_required"
+  },
+  "created_work": {
+    "condition_events": 0,
+    "receipt_event_links": 0,
+    "event_deliveries": 0,
+    "indexing_jobs": 0
+  },
+  "review": {
+    "reprocessing_allowed": false,
+    "blocking_reason": "source_evidence_required"
+  }
+}

@@ -1,0 +1,516 @@
+{
+  "description": "Authored policy preconditions and whole-pipeline expected outcomes. HTTP codes assume these synthetic registered native/generic acknowledgment contracts; no runtime classifier produced the results.",
+  "cases": [
+    {
+      "case_id": "unknown-status-known-entity",
+      "facts": {
+        "path": "native",
+        "classification": "valid_unmapped_value",
+        "authenticated": true,
+        "binding_valid": true,
+        "entity_exact": true,
+        "unknown_rule": true
+      },
+      "expected": {
+        "disposition": "emit_unknown",
+        "http_status": 200,
+        "new_receipt_created": true,
+        "receipt_status": "processed",
+        "input_evidence_kind": "replayable",
+        "condition_events_created": 1
+      }
+    },
+    {
+      "case_id": "generic-unknown-severity",
+      "facts": {
+        "path": "generic",
+        "classification": "valid_unknown_severity",
+        "authenticated": true,
+        "binding_valid": true,
+        "closed_contract_valid": true
+      },
+      "expected": {
+        "disposition": "emit_unknown",
+        "http_status": 202,
+        "new_receipt_created": true,
+        "receipt_status": "processed",
+        "input_evidence_kind": "replayable",
+        "condition_events_created": 1
+      }
+    },
+    {
+      "case_id": "native-optional-extension",
+      "facts": {
+        "path": "native",
+        "classification": "permitted_optional_extension",
+        "authenticated": true,
+        "binding_valid": true,
+        "pinned_projection_discards_extra": true
+      },
+      "expected": {
+        "disposition": "discard_optional",
+        "http_status": 200,
+        "new_receipt_created": true,
+        "receipt_status": "processed",
+        "input_evidence_kind": "replayable",
+        "condition_events_created": 1
+      }
+    },
+    {
+      "case_id": "generic-extra-field",
+      "facts": {
+        "path": "generic",
+        "classification": "closed_contract_extra_field",
+        "authenticated": true,
+        "binding_valid": true
+      },
+      "expected": {
+        "disposition": "reject",
+        "http_status": 422,
+        "new_receipt_created": false,
+        "receipt_status": "not_created",
+        "input_evidence_kind": "none",
+        "condition_events_created": 0
+      }
+    },
+    {
+      "case_id": "generic-future-schema",
+      "facts": {
+        "path": "generic",
+        "classification": "unsupported_schema",
+        "authenticated": true,
+        "binding_valid": true
+      },
+      "expected": {
+        "disposition": "reject",
+        "http_status": 422,
+        "new_receipt_created": false,
+        "receipt_status": "not_created",
+        "input_evidence_kind": "none",
+        "condition_events_created": 0
+      }
+    },
+    {
+      "case_id": "generic-reserved-provenance",
+      "facts": {
+        "path": "generic",
+        "classification": "reserved_attribute",
+        "authenticated": true,
+        "binding_valid": true
+      },
+      "expected": {
+        "disposition": "reject",
+        "http_status": 422,
+        "new_receipt_created": false,
+        "receipt_status": "not_created",
+        "input_evidence_kind": "none",
+        "condition_events_created": 0
+      }
+    },
+    {
+      "case_id": "native-future-type-default",
+      "facts": {
+        "path": "native",
+        "classification": "unsupported_event_type",
+        "authenticated": true,
+        "binding_valid": true,
+        "diagnostic_quarantine_enabled": false
+      },
+      "expected": {
+        "disposition": "reject",
+        "http_status": 422,
+        "new_receipt_created": false,
+        "receipt_status": "not_created",
+        "input_evidence_kind": "none",
+        "condition_events_created": 0
+      }
+    },
+    {
+      "case_id": "native-future-type-opt-in",
+      "facts": {
+        "path": "native",
+        "classification": "unsupported_event_type",
+        "authenticated": true,
+        "binding_valid": true,
+        "diagnostic_quarantine_enabled": true,
+        "safe_projector": true,
+        "comparison_contract_available": true,
+        "capacity_available": true,
+        "acknowledgment_contract": true
+      },
+      "expected": {
+        "disposition": "quarantine",
+        "http_status": 200,
+        "new_receipt_created": true,
+        "receipt_status": "quarantined",
+        "input_evidence_kind": "diagnostic_only",
+        "condition_events_created": 0
+      }
+    },
+    {
+      "case_id": "native-opt-in-no-projector",
+      "facts": {
+        "path": "native",
+        "classification": "unsupported_event_type",
+        "authenticated": true,
+        "binding_valid": true,
+        "diagnostic_quarantine_enabled": true,
+        "safe_projector": false
+      },
+      "expected": {
+        "disposition": "reject",
+        "http_status": 422,
+        "new_receipt_created": false,
+        "receipt_status": "not_created",
+        "input_evidence_kind": "none",
+        "condition_events_created": 0
+      }
+    },
+    {
+      "case_id": "native-opt-in-no-comparison",
+      "facts": {
+        "path": "native",
+        "classification": "unsupported_event_type",
+        "authenticated": true,
+        "binding_valid": true,
+        "diagnostic_quarantine_enabled": true,
+        "safe_projector": true,
+        "reliable_key": true,
+        "comparison_contract_available": false
+      },
+      "expected": {
+        "disposition": "reject",
+        "http_status": 503,
+        "new_receipt_created": false,
+        "receipt_status": "not_created",
+        "input_evidence_kind": "none",
+        "condition_events_created": 0
+      }
+    },
+    {
+      "case_id": "native-opt-in-storage-failure",
+      "facts": {
+        "path": "native",
+        "classification": "unsupported_event_type",
+        "authenticated": true,
+        "binding_valid": true,
+        "diagnostic_quarantine_enabled": true,
+        "safe_projector": true,
+        "storage_commit": false
+      },
+      "expected": {
+        "disposition": "reject",
+        "http_status": 503,
+        "new_receipt_created": false,
+        "receipt_status": "not_created",
+        "input_evidence_kind": "none",
+        "condition_events_created": 0
+      }
+    },
+    {
+      "case_id": "unauthenticated",
+      "facts": {
+        "path": "native",
+        "classification": "unsupported_event_type",
+        "authenticated": false
+      },
+      "expected": {
+        "disposition": "reject",
+        "http_status": 401,
+        "new_receipt_created": false,
+        "receipt_status": "not_created",
+        "input_evidence_kind": "none",
+        "condition_events_created": 0
+      }
+    },
+    {
+      "case_id": "wrong-generation",
+      "facts": {
+        "path": "native",
+        "classification": "source_scope",
+        "authenticated": true,
+        "binding_valid": false
+      },
+      "expected": {
+        "disposition": "reject",
+        "http_status": 403,
+        "new_receipt_created": false,
+        "receipt_status": "not_created",
+        "input_evidence_kind": "none",
+        "condition_events_created": 0
+      }
+    },
+    {
+      "case_id": "closed-generation",
+      "facts": {
+        "path": "native",
+        "classification": "source_closed",
+        "authenticated": true,
+        "binding_valid": true,
+        "intake_closed": true
+      },
+      "expected": {
+        "disposition": "reject",
+        "http_status": 403,
+        "new_receipt_created": false,
+        "receipt_status": "not_created",
+        "input_evidence_kind": "none",
+        "condition_events_created": 0
+      }
+    },
+    {
+      "case_id": "invalid-json",
+      "facts": {
+        "path": "generic",
+        "classification": "invalid_json",
+        "authenticated": true,
+        "binding_valid": true
+      },
+      "expected": {
+        "disposition": "reject",
+        "http_status": 400,
+        "new_receipt_created": false,
+        "receipt_status": "not_created",
+        "input_evidence_kind": "none",
+        "condition_events_created": 0
+      }
+    },
+    {
+      "case_id": "duplicate-json-members",
+      "facts": {
+        "path": "generic",
+        "classification": "duplicate_members",
+        "authenticated": true,
+        "binding_valid": true
+      },
+      "expected": {
+        "disposition": "reject",
+        "http_status": 400,
+        "new_receipt_created": false,
+        "receipt_status": "not_created",
+        "input_evidence_kind": "none",
+        "condition_events_created": 0
+      }
+    },
+    {
+      "case_id": "payload-too-large",
+      "facts": {
+        "path": "native",
+        "classification": "request_limit",
+        "authenticated": true,
+        "binding_valid": true
+      },
+      "expected": {
+        "disposition": "reject",
+        "http_status": 413,
+        "new_receipt_created": false,
+        "receipt_status": "not_created",
+        "input_evidence_kind": "none",
+        "condition_events_created": 0
+      }
+    },
+    {
+      "case_id": "unsupported-media",
+      "facts": {
+        "path": "native",
+        "classification": "unsupported_media",
+        "authenticated": true,
+        "binding_valid": true
+      },
+      "expected": {
+        "disposition": "reject",
+        "http_status": 415,
+        "new_receipt_created": false,
+        "receipt_status": "not_created",
+        "input_evidence_kind": "none",
+        "condition_events_created": 0
+      }
+    },
+    {
+      "case_id": "quarantine-quota",
+      "facts": {
+        "path": "native",
+        "classification": "unsupported_event_type",
+        "authenticated": true,
+        "binding_valid": true,
+        "diagnostic_quarantine_enabled": true,
+        "capacity_available": false
+      },
+      "expected": {
+        "disposition": "reject",
+        "http_status": 429,
+        "new_receipt_created": false,
+        "receipt_status": "not_created",
+        "input_evidence_kind": "none",
+        "condition_events_created": 0
+      }
+    },
+    {
+      "case_id": "recognized-empty",
+      "facts": {
+        "path": "native",
+        "classification": "recognized_empty_collection",
+        "authenticated": true,
+        "binding_valid": true,
+        "recognized_ignore_rule": true
+      },
+      "expected": {
+        "disposition": "ignore",
+        "http_status": 200,
+        "new_receipt_created": true,
+        "receipt_status": "ignored",
+        "input_evidence_kind": "replayable",
+        "condition_events_created": 0
+      }
+    },
+    {
+      "case_id": "recognized-test",
+      "facts": {
+        "path": "native",
+        "classification": "recognized_test",
+        "authenticated": true,
+        "binding_valid": true,
+        "recognized_ignore_rule": true
+      },
+      "expected": {
+        "disposition": "ignore",
+        "http_status": 200,
+        "new_receipt_created": true,
+        "receipt_status": "ignored",
+        "input_evidence_kind": "replayable",
+        "condition_events_created": 0
+      }
+    },
+    {
+      "case_id": "missing-native-required-after-acceptance",
+      "facts": {
+        "path": "native",
+        "classification": "required_field_missing",
+        "authenticated": true,
+        "binding_valid": true,
+        "durable_before_item_validation": true,
+        "safe_replayable_projection": true
+      },
+      "expected": {
+        "disposition": "quarantine",
+        "http_status": 200,
+        "new_receipt_created": true,
+        "receipt_status": "quarantined",
+        "input_evidence_kind": "replayable",
+        "condition_events_created": 0
+      }
+    },
+    {
+      "case_id": "unsafe-invalid-item-no-projection",
+      "facts": {
+        "path": "native",
+        "classification": "required_field_object",
+        "authenticated": true,
+        "binding_valid": true,
+        "safe_replayable_projection": false,
+        "diagnostic_quarantine_enabled": false
+      },
+      "expected": {
+        "disposition": "reject",
+        "http_status": 422,
+        "new_receipt_created": false,
+        "receipt_status": "not_created",
+        "input_evidence_kind": "none",
+        "condition_events_created": 0
+      }
+    },
+    {
+      "case_id": "mixed-batch-invalid-item",
+      "facts": {
+        "path": "native",
+        "classification": "invalid_batch_item",
+        "authenticated": true,
+        "binding_valid": true,
+        "durable_before_item_validation": true,
+        "safe_replayable_projection": true
+      },
+      "expected": {
+        "disposition": "quarantine",
+        "http_status": 200,
+        "new_receipt_created": true,
+        "receipt_status": "quarantined",
+        "input_evidence_kind": "replayable",
+        "condition_events_created": 0
+      }
+    },
+    {
+      "case_id": "temporary-artifact-after-acceptance",
+      "facts": {
+        "path": "native",
+        "classification": "temporary_artifact_unavailable",
+        "authenticated": true,
+        "binding_valid": true,
+        "retry_budget_remaining": true
+      },
+      "expected": {
+        "disposition": "retry_later",
+        "http_status": 200,
+        "new_receipt_created": true,
+        "receipt_status": "retry_wait",
+        "input_evidence_kind": "replayable",
+        "condition_events_created": 0
+      }
+    },
+    {
+      "case_id": "artifact-retry-exhausted",
+      "facts": {
+        "path": "native",
+        "classification": "temporary_artifact_unavailable",
+        "authenticated": true,
+        "binding_valid": true,
+        "retry_budget_remaining": false
+      },
+      "expected": {
+        "disposition": "quarantine",
+        "http_status": 200,
+        "new_receipt_created": true,
+        "receipt_status": "quarantined",
+        "input_evidence_kind": "replayable",
+        "condition_events_created": 0
+      }
+    },
+    {
+      "case_id": "reliable-diagnostic-duplicate",
+      "facts": {
+        "path": "native",
+        "classification": "retained_reliable_key",
+        "authenticated": true,
+        "binding_valid": true,
+        "comparison_matches": true,
+        "existing_evidence_kind": "diagnostic_only"
+      },
+      "expected": {
+        "disposition": "reuse_receipt",
+        "http_status": 200,
+        "new_receipt_created": false,
+        "receipt_status": "quarantined",
+        "input_evidence_kind": "diagnostic_only",
+        "condition_events_created": 0
+      }
+    },
+    {
+      "case_id": "same-summary-different-body",
+      "facts": {
+        "path": "native",
+        "classification": "retained_reliable_key",
+        "authenticated": true,
+        "binding_valid": true,
+        "comparison_matches": false,
+        "safe_diagnostic_summary_matches": true
+      },
+      "expected": {
+        "disposition": "reject",
+        "http_status": 409,
+        "new_receipt_created": false,
+        "receipt_status": "retained_original",
+        "input_evidence_kind": "none",
+        "condition_events_created": 0
+      }
+    }
+  ]
+}

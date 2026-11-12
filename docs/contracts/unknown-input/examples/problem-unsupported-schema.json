@@ -1,0 +1,7 @@
+{
+  "type": "about:blank",
+  "title": "Unprocessable Content",
+  "status": 422,
+  "code": "input.unsupported_schema",
+  "detail": "This registered input schema version is unsupported."
+}

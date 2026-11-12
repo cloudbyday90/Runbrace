@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:runbrace:schema:sabnzbd-history-input:1",
+  "title": "Runbrace proposed bounded SAB history input profile v1",
+  "description": "Minimal native shape for synthetic review. Additional vendor fields may exist; the retained projection is explicitly narrower.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "history"
+  ],
+  "properties": {
+    "history": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "slots"
+      ],
+      "properties": {
+        "noofslots": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "last_history_update": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "slots": {
+          "type": "array",
+          "maxItems": 100,
+          "items": {
+            "type": "object",
+            "additionalProperties": true,
+            "required": [
+              "nzo_id",
+              "status"
+            ],
+            "properties": {
+              "nzo_id": {
+                "$ref": "urn:runbrace:schema:identity:1#/$defs/opaque_id"
+              },
+              "status": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128,
+                "not": {
+                  "pattern": "[\\u0000-\\u001f\\u007f]"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

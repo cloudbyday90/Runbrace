@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "family": "status_table_snapshot_v1",
+  "profile_id": "sabnzbd.history_status",
+  "mapping_version": "2026-11-09.1",
+  "service": "sabnzbd",
+  "input_profile": "sabnzbd.history_status_v1",
+  "projection_version": "sabnzbd.history_identity_status_v1",
+  "selectors": {
+    "items": "/history/slots",
+    "entity_id": "/nzo_id",
+    "native_state": "/status"
+  },
+  "retained_item_fields": [
+    "/nzo_id",
+    "/status"
+  ],
+  "entity_kind": "download",
+  "condition_slot": "download_status",
+  "observation_kind": "snapshot",
+  "time_basis": "collector_observed",
+  "identity_policy": "sabnzbd.history_snapshot_unkeyed_v1",
+  "rules": [
+    {
+      "rule_id": "failed",
+      "native_values": [
+        "Failed"
+      ],
+      "condition": {
+        "name": "download.failed",
+        "state": "failing",
+        "severity": "error",
+        "message": "SABnzbd reported a failed download."
+      }
+    },
+    {
+      "rule_id": "completed",
+      "native_values": [
+        "Completed"
+      ],
+      "condition": {
+        "name": "download.completed",
+        "state": "informational",
+        "severity": "info",
+        "message": "SABnzbd reported a completed download."
+      }
+    },
+    {
+      "rule_id": "processing",
+      "native_values": [
+        "Queued",
+        "QuickCheck",
+        "Verifying",
+        "Repairing",
+        "Fetching",
+        "Extracting",
+        "Moving",
+        "Running"
+      ],
+      "condition": {
+        "name": "download.progress",
+        "state": "informational",
+        "severity": "info",
+        "message": "SABnzbd reported download post-processing activity."
+      }
+    }
+  ],
+  "unknown": {
+    "name": "download.status",
+    "state": "unknown",
+    "severity": "unknown",
+    "message": "SABnzbd reported an unrecognized download status."
+  },
+  "message_policy": "fixed",
+  "invalid_item": "quarantine_receipt",
+  "empty_collection": "ignore",
+  "max_conditions": 100
+}

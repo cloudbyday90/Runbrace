@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:runbrace:schema:condition-draft:1",
+  "title": "Runbrace draft internal condition candidate v1",
+  "description": "Trusted adapter output only; publisher owns local IDs, source context, receive time, and reserved provenance.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "item_key",
+    "identity",
+    "entity",
+    "condition",
+    "observation_kind",
+    "observed_at",
+    "observation_time_basis"
+  ],
+  "properties": {
+    "item_key": {
+      "$ref": "urn:runbrace:schema:identity:1#/$defs/opaque_id"
+    },
+    "identity": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "mode",
+            "policy_version"
+          ],
+          "properties": {
+            "mode": {
+              "const": "unkeyed"
+            },
+            "policy_version": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128,
+              "pattern": "^[a-z][a-z0-9_.:-]*$"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "mode",
+            "policy_version",
+            "scope",
+            "key",
+            "condition_slot"
+          ],
+          "properties": {
+            "mode": {
+              "const": "reliable"
+            },
+            "policy_version": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128,
+              "pattern": "^[a-z][a-z0-9_.:-]*$"
+            },
+            "scope": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "key": {
+              "$ref": "urn:runbrace:schema:identity:1#/$defs/opaque_id"
+            },
+            "condition_slot": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          }
+        }
+      ]
+    },
+    "entity": {
+      "$ref": "urn:runbrace:schema:condition:1#/properties/entity"
+    },
+    "condition": {
+      "$ref": "urn:runbrace:schema:condition:1#/properties/condition"
+    },
+    "observation_kind": {
+      "enum": [
+        "event",
+        "snapshot"
+      ]
+    },
+    "observation_time_basis": {
+      "enum": [
+        "source_reported",
+        "collector_observed",
+        "unknown"
+      ]
+    },
+    "observed_at": {
+      "$ref": "urn:runbrace:schema:condition:1#/properties/observed_at"
+    },
+    "source_event_id": {
+      "$ref": "urn:runbrace:schema:identity:1#/$defs/opaque_id"
+    },
+    "attributes": {
+      "type": "object",
+      "maxProperties": 23,
+      "propertyNames": {
+        "maxLength": 64,
+        "pattern": "^[a-z][a-z0-9_]*(\\.[a-z][a-z0-9_]*)+$",
+        "not": {
+          "pattern": "^runbrace\\."
+        }
+      },
+      "additionalProperties": {
+        "type": "string",
+        "maxLength": 1024
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "observation_time_basis": {
+            "const": "unknown"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "observed_at": {
+            "type": "null"
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "observed_at": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  ]
+}

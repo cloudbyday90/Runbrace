@@ -1,0 +1,623 @@
+{
+  "schema": "contracts/log-record-v1.schema.json",
+  "scope": "generated-offline-only",
+  "cases": [
+    {
+      "name": "positive_exact_legacy_string",
+      "valid": true,
+      "instance": {
+        "version": 1,
+        "timestamp": "2026-11-12T00:00:00Z",
+        "resource": {
+          "service.name": "runbrace-compatibility",
+          "service.version": "offline-prototype-v1",
+          "deployment.environment.name": "offline"
+        },
+        "operation": "handoff",
+        "outcome": "unknown",
+        "reason": "timeout",
+        "request_id": "019a7410-0000-7000-8000-000000000001",
+        "event_id": "019a7410-0000-7000-8000-000000000002",
+        "job_id": "fixture-job-1",
+        "attempt_id": "fixture-attempt-1",
+        "legacy_id": "9223372036854775807",
+        "duration_ms": 125.5,
+        "trace_id": "11111111111111111111111111111111",
+        "span_id": "2222222222222222"
+      }
+    },
+    {
+      "name": "positive_minimal_no_trace",
+      "valid": true,
+      "instance": {
+        "version": 1,
+        "timestamp": "2026-11-12T00:00:00Z",
+        "resource": {
+          "service.name": "runbrace-compatibility",
+          "service.version": "offline-prototype-v1",
+          "deployment.environment.name": "offline"
+        },
+        "operation": "handoff",
+        "outcome": "unknown",
+        "reason": "timeout"
+      }
+    },
+    {
+      "name": "positive_new_retry_attempt",
+      "valid": true,
+      "instance": {
+        "version": 1,
+        "timestamp": "2026-11-12T00:00:00Z",
+        "resource": {
+          "service.name": "runbrace-compatibility",
+          "service.version": "offline-prototype-v1",
+          "deployment.environment.name": "offline"
+        },
+        "operation": "handoff",
+        "outcome": "unknown",
+        "reason": "timeout",
+        "request_id": "019a7410-0000-7000-8000-000000000001",
+        "event_id": "019a7410-0000-7000-8000-000000000002",
+        "job_id": "fixture-job-1",
+        "attempt_id": "fixture-attempt-2",
+        "legacy_id": "9223372036854775807",
+        "duration_ms": 125.5,
+        "trace_id": "33333333333333333333333333333333",
+        "span_id": "4444444444444444"
+      }
+    },
+    {
+      "name": "negative_unknown_outcome",
+      "valid": false,
+      "instance": {
+        "version": 1,
+        "timestamp": "2026-11-12T00:00:00Z",
+        "resource": {
+          "service.name": "runbrace-compatibility",
+          "service.version": "offline-prototype-v1",
+          "deployment.environment.name": "offline"
+        },
+        "operation": "handoff",
+        "outcome": "new-source-state",
+        "reason": "timeout",
+        "request_id": "019a7410-0000-7000-8000-000000000001",
+        "event_id": "019a7410-0000-7000-8000-000000000002",
+        "job_id": "fixture-job-1",
+        "attempt_id": "fixture-attempt-1",
+        "legacy_id": "9223372036854775807",
+        "duration_ms": 125.5,
+        "trace_id": "11111111111111111111111111111111",
+        "span_id": "2222222222222222"
+      }
+    },
+    {
+      "name": "negative_unknown_reason",
+      "valid": false,
+      "instance": {
+        "version": 1,
+        "timestamp": "2026-11-12T00:00:00Z",
+        "resource": {
+          "service.name": "runbrace-compatibility",
+          "service.version": "offline-prototype-v1",
+          "deployment.environment.name": "offline"
+        },
+        "operation": "handoff",
+        "outcome": "unknown",
+        "reason": "raw-exception",
+        "request_id": "019a7410-0000-7000-8000-000000000001",
+        "event_id": "019a7410-0000-7000-8000-000000000002",
+        "job_id": "fixture-job-1",
+        "attempt_id": "fixture-attempt-1",
+        "legacy_id": "9223372036854775807",
+        "duration_ms": 125.5,
+        "trace_id": "11111111111111111111111111111111",
+        "span_id": "2222222222222222"
+      }
+    },
+    {
+      "name": "negative_unknown_operation",
+      "valid": false,
+      "instance": {
+        "version": 1,
+        "timestamp": "2026-11-12T00:00:00Z",
+        "resource": {
+          "service.name": "runbrace-compatibility",
+          "service.version": "offline-prototype-v1",
+          "deployment.environment.name": "offline"
+        },
+        "operation": "arbitrary-command",
+        "outcome": "unknown",
+        "reason": "timeout",
+        "request_id": "019a7410-0000-7000-8000-000000000001",
+        "event_id": "019a7410-0000-7000-8000-000000000002",
+        "job_id": "fixture-job-1",
+        "attempt_id": "fixture-attempt-1",
+        "legacy_id": "9223372036854775807",
+        "duration_ms": 125.5,
+        "trace_id": "11111111111111111111111111111111",
+        "span_id": "2222222222222222"
+      }
+    },
+    {
+      "name": "negative_extra_raw_payload",
+      "valid": false,
+      "instance": {
+        "version": 1,
+        "timestamp": "2026-11-12T00:00:00Z",
+        "resource": {
+          "service.name": "runbrace-compatibility",
+          "service.version": "offline-prototype-v1",
+          "deployment.environment.name": "offline"
+        },
+        "operation": "handoff",
+        "outcome": "unknown",
+        "reason": "timeout",
+        "request_id": "019a7410-0000-7000-8000-000000000001",
+        "event_id": "019a7410-0000-7000-8000-000000000002",
+        "job_id": "fixture-job-1",
+        "attempt_id": "fixture-attempt-1",
+        "legacy_id": "9223372036854775807",
+        "duration_ms": 125.5,
+        "trace_id": "11111111111111111111111111111111",
+        "span_id": "2222222222222222",
+        "payload": {
+          "body": "generated-private-content"
+        }
+      }
+    },
+    {
+      "name": "negative_nested_resource_environment_dump",
+      "valid": false,
+      "instance": {
+        "version": 1,
+        "timestamp": "2026-11-12T00:00:00Z",
+        "resource": {
+          "service.name": "runbrace-compatibility",
+          "service.version": "offline-prototype-v1",
+          "deployment.environment.name": "offline",
+          "process.environment": "generated-private-content"
+        },
+        "operation": "handoff",
+        "outcome": "unknown",
+        "reason": "timeout",
+        "request_id": "019a7410-0000-7000-8000-000000000001",
+        "event_id": "019a7410-0000-7000-8000-000000000002",
+        "job_id": "fixture-job-1",
+        "attempt_id": "fixture-attempt-1",
+        "legacy_id": "9223372036854775807",
+        "duration_ms": 125.5,
+        "trace_id": "11111111111111111111111111111111",
+        "span_id": "2222222222222222"
+      }
+    },
+    {
+      "name": "negative_numeric_legacy_rounding",
+      "valid": false,
+      "instance": {
+        "version": 1,
+        "timestamp": "2026-11-12T00:00:00Z",
+        "resource": {
+          "service.name": "runbrace-compatibility",
+          "service.version": "offline-prototype-v1",
+          "deployment.environment.name": "offline"
+        },
+        "operation": "handoff",
+        "outcome": "unknown",
+        "reason": "timeout",
+        "request_id": "019a7410-0000-7000-8000-000000000001",
+        "event_id": "019a7410-0000-7000-8000-000000000002",
+        "job_id": "fixture-job-1",
+        "attempt_id": "fixture-attempt-1",
+        "legacy_id": 9223372036854775807,
+        "duration_ms": 125.5,
+        "trace_id": "11111111111111111111111111111111",
+        "span_id": "2222222222222222"
+      }
+    },
+    {
+      "name": "negative_null_id",
+      "valid": false,
+      "instance": {
+        "version": 1,
+        "timestamp": "2026-11-12T00:00:00Z",
+        "resource": {
+          "service.name": "runbrace-compatibility",
+          "service.version": "offline-prototype-v1",
+          "deployment.environment.name": "offline"
+        },
+        "operation": "handoff",
+        "outcome": "unknown",
+        "reason": "timeout",
+        "request_id": "019a7410-0000-7000-8000-000000000001",
+        "event_id": "019a7410-0000-7000-8000-000000000002",
+        "job_id": null,
+        "attempt_id": "fixture-attempt-1",
+        "legacy_id": "9223372036854775807",
+        "duration_ms": 125.5,
+        "trace_id": "11111111111111111111111111111111",
+        "span_id": "2222222222222222"
+      }
+    },
+    {
+      "name": "negative_path_id",
+      "valid": false,
+      "instance": {
+        "version": 1,
+        "timestamp": "2026-11-12T00:00:00Z",
+        "resource": {
+          "service.name": "runbrace-compatibility",
+          "service.version": "offline-prototype-v1",
+          "deployment.environment.name": "offline"
+        },
+        "operation": "handoff",
+        "outcome": "unknown",
+        "reason": "timeout",
+        "request_id": "019a7410-0000-7000-8000-000000000001",
+        "event_id": "019a7410-0000-7000-8000-000000000002",
+        "job_id": "/generated/media/path",
+        "attempt_id": "fixture-attempt-1",
+        "legacy_id": "9223372036854775807",
+        "duration_ms": 125.5,
+        "trace_id": "11111111111111111111111111111111",
+        "span_id": "2222222222222222"
+      }
+    },
+    {
+      "name": "negative_id_newline",
+      "valid": false,
+      "instance": {
+        "version": 1,
+        "timestamp": "2026-11-12T00:00:00Z",
+        "resource": {
+          "service.name": "runbrace-compatibility",
+          "service.version": "offline-prototype-v1",
+          "deployment.environment.name": "offline"
+        },
+        "operation": "handoff",
+        "outcome": "unknown",
+        "reason": "timeout",
+        "request_id": "019a7410-0000-7000-8000-000000000001",
+        "event_id": "019a7410-0000-7000-8000-000000000002",
+        "job_id": "fixture-job\n",
+        "attempt_id": "fixture-attempt-1",
+        "legacy_id": "9223372036854775807",
+        "duration_ms": 125.5,
+        "trace_id": "11111111111111111111111111111111",
+        "span_id": "2222222222222222"
+      }
+    },
+    {
+      "name": "negative_oversize_id",
+      "valid": false,
+      "instance": {
+        "version": 1,
+        "timestamp": "2026-11-12T00:00:00Z",
+        "resource": {
+          "service.name": "runbrace-compatibility",
+          "service.version": "offline-prototype-v1",
+          "deployment.environment.name": "offline"
+        },
+        "operation": "handoff",
+        "outcome": "unknown",
+        "reason": "timeout",
+        "request_id": "019a7410-0000-7000-8000-000000000001",
+        "event_id": "019a7410-0000-7000-8000-000000000002",
+        "job_id": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "attempt_id": "fixture-attempt-1",
+        "legacy_id": "9223372036854775807",
+        "duration_ms": 125.5,
+        "trace_id": "11111111111111111111111111111111",
+        "span_id": "2222222222222222"
+      }
+    },
+    {
+      "name": "negative_zero_trace",
+      "valid": false,
+      "instance": {
+        "version": 1,
+        "timestamp": "2026-11-12T00:00:00Z",
+        "resource": {
+          "service.name": "runbrace-compatibility",
+          "service.version": "offline-prototype-v1",
+          "deployment.environment.name": "offline"
+        },
+        "operation": "handoff",
+        "outcome": "unknown",
+        "reason": "timeout",
+        "request_id": "019a7410-0000-7000-8000-000000000001",
+        "event_id": "019a7410-0000-7000-8000-000000000002",
+        "job_id": "fixture-job-1",
+        "attempt_id": "fixture-attempt-1",
+        "legacy_id": "9223372036854775807",
+        "duration_ms": 125.5,
+        "trace_id": "00000000000000000000000000000000",
+        "span_id": "2222222222222222"
+      }
+    },
+    {
+      "name": "negative_zero_span",
+      "valid": false,
+      "instance": {
+        "version": 1,
+        "timestamp": "2026-11-12T00:00:00Z",
+        "resource": {
+          "service.name": "runbrace-compatibility",
+          "service.version": "offline-prototype-v1",
+          "deployment.environment.name": "offline"
+        },
+        "operation": "handoff",
+        "outcome": "unknown",
+        "reason": "timeout",
+        "request_id": "019a7410-0000-7000-8000-000000000001",
+        "event_id": "019a7410-0000-7000-8000-000000000002",
+        "job_id": "fixture-job-1",
+        "attempt_id": "fixture-attempt-1",
+        "legacy_id": "9223372036854775807",
+        "duration_ms": 125.5,
+        "trace_id": "11111111111111111111111111111111",
+        "span_id": "0000000000000000"
+      }
+    },
+    {
+      "name": "negative_trace_newline",
+      "valid": false,
+      "instance": {
+        "version": 1,
+        "timestamp": "2026-11-12T00:00:00Z",
+        "resource": {
+          "service.name": "runbrace-compatibility",
+          "service.version": "offline-prototype-v1",
+          "deployment.environment.name": "offline"
+        },
+        "operation": "handoff",
+        "outcome": "unknown",
+        "reason": "timeout",
+        "request_id": "019a7410-0000-7000-8000-000000000001",
+        "event_id": "019a7410-0000-7000-8000-000000000002",
+        "job_id": "fixture-job-1",
+        "attempt_id": "fixture-attempt-1",
+        "legacy_id": "9223372036854775807",
+        "duration_ms": 125.5,
+        "trace_id": "11111111111111111111111111111111\n",
+        "span_id": "2222222222222222"
+      }
+    },
+    {
+      "name": "negative_trace_uppercase",
+      "valid": false,
+      "instance": {
+        "version": 1,
+        "timestamp": "2026-11-12T00:00:00Z",
+        "resource": {
+          "service.name": "runbrace-compatibility",
+          "service.version": "offline-prototype-v1",
+          "deployment.environment.name": "offline"
+        },
+        "operation": "handoff",
+        "outcome": "unknown",
+        "reason": "timeout",
+        "request_id": "019a7410-0000-7000-8000-000000000001",
+        "event_id": "019a7410-0000-7000-8000-000000000002",
+        "job_id": "fixture-job-1",
+        "attempt_id": "fixture-attempt-1",
+        "legacy_id": "9223372036854775807",
+        "duration_ms": 125.5,
+        "trace_id": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "span_id": "2222222222222222"
+      }
+    },
+    {
+      "name": "negative_calendar",
+      "valid": false,
+      "instance": {
+        "version": 1,
+        "timestamp": "2026-02-30T00:00:00Z",
+        "resource": {
+          "service.name": "runbrace-compatibility",
+          "service.version": "offline-prototype-v1",
+          "deployment.environment.name": "offline"
+        },
+        "operation": "handoff",
+        "outcome": "unknown",
+        "reason": "timeout",
+        "request_id": "019a7410-0000-7000-8000-000000000001",
+        "event_id": "019a7410-0000-7000-8000-000000000002",
+        "job_id": "fixture-job-1",
+        "attempt_id": "fixture-attempt-1",
+        "legacy_id": "9223372036854775807",
+        "duration_ms": 125.5,
+        "trace_id": "11111111111111111111111111111111",
+        "span_id": "2222222222222222"
+      }
+    },
+    {
+      "name": "negative_duration_boolean",
+      "valid": false,
+      "instance": {
+        "version": 1,
+        "timestamp": "2026-11-12T00:00:00Z",
+        "resource": {
+          "service.name": "runbrace-compatibility",
+          "service.version": "offline-prototype-v1",
+          "deployment.environment.name": "offline"
+        },
+        "operation": "handoff",
+        "outcome": "unknown",
+        "reason": "timeout",
+        "request_id": "019a7410-0000-7000-8000-000000000001",
+        "event_id": "019a7410-0000-7000-8000-000000000002",
+        "job_id": "fixture-job-1",
+        "attempt_id": "fixture-attempt-1",
+        "legacy_id": "9223372036854775807",
+        "duration_ms": true,
+        "trace_id": "11111111111111111111111111111111",
+        "span_id": "2222222222222222"
+      }
+    },
+    {
+      "name": "negative_duration_excess",
+      "valid": false,
+      "instance": {
+        "version": 1,
+        "timestamp": "2026-11-12T00:00:00Z",
+        "resource": {
+          "service.name": "runbrace-compatibility",
+          "service.version": "offline-prototype-v1",
+          "deployment.environment.name": "offline"
+        },
+        "operation": "handoff",
+        "outcome": "unknown",
+        "reason": "timeout",
+        "request_id": "019a7410-0000-7000-8000-000000000001",
+        "event_id": "019a7410-0000-7000-8000-000000000002",
+        "job_id": "fixture-job-1",
+        "attempt_id": "fixture-attempt-1",
+        "legacy_id": "9223372036854775807",
+        "duration_ms": 86400001,
+        "trace_id": "11111111111111111111111111111111",
+        "span_id": "2222222222222222"
+      }
+    },
+    {
+      "name": "negative_version",
+      "valid": false,
+      "instance": {
+        "version": 2,
+        "timestamp": "2026-11-12T00:00:00Z",
+        "resource": {
+          "service.name": "runbrace-compatibility",
+          "service.version": "offline-prototype-v1",
+          "deployment.environment.name": "offline"
+        },
+        "operation": "handoff",
+        "outcome": "unknown",
+        "reason": "timeout",
+        "request_id": "019a7410-0000-7000-8000-000000000001",
+        "event_id": "019a7410-0000-7000-8000-000000000002",
+        "job_id": "fixture-job-1",
+        "attempt_id": "fixture-attempt-1",
+        "legacy_id": "9223372036854775807",
+        "duration_ms": 125.5,
+        "trace_id": "11111111111111111111111111111111",
+        "span_id": "2222222222222222"
+      }
+    },
+    {
+      "name": "negative_resource_environment",
+      "valid": false,
+      "instance": {
+        "version": 1,
+        "timestamp": "2026-11-12T00:00:00Z",
+        "resource": {
+          "service.name": "runbrace-compatibility",
+          "service.version": "offline-prototype-v1",
+          "deployment.environment.name": "user-controlled"
+        },
+        "operation": "handoff",
+        "outcome": "unknown",
+        "reason": "timeout",
+        "request_id": "019a7410-0000-7000-8000-000000000001",
+        "event_id": "019a7410-0000-7000-8000-000000000002",
+        "job_id": "fixture-job-1",
+        "attempt_id": "fixture-attempt-1",
+        "legacy_id": "9223372036854775807",
+        "duration_ms": 125.5,
+        "trace_id": "11111111111111111111111111111111",
+        "span_id": "2222222222222222"
+      }
+    },
+    {
+      "name": "negative_resource_version_newline",
+      "valid": false,
+      "instance": {
+        "version": 1,
+        "timestamp": "2026-11-12T00:00:00Z",
+        "resource": {
+          "service.name": "runbrace-compatibility",
+          "service.version": "v1\n",
+          "deployment.environment.name": "offline"
+        },
+        "operation": "handoff",
+        "outcome": "unknown",
+        "reason": "timeout",
+        "request_id": "019a7410-0000-7000-8000-000000000001",
+        "event_id": "019a7410-0000-7000-8000-000000000002",
+        "job_id": "fixture-job-1",
+        "attempt_id": "fixture-attempt-1",
+        "legacy_id": "9223372036854775807",
+        "duration_ms": 125.5,
+        "trace_id": "11111111111111111111111111111111",
+        "span_id": "2222222222222222"
+      }
+    },
+    {
+      "name": "negative_missing_trace_id",
+      "valid": false,
+      "instance": {
+        "version": 1,
+        "timestamp": "2026-11-12T00:00:00Z",
+        "resource": {
+          "service.name": "runbrace-compatibility",
+          "service.version": "offline-prototype-v1",
+          "deployment.environment.name": "offline"
+        },
+        "operation": "handoff",
+        "outcome": "unknown",
+        "reason": "timeout",
+        "request_id": "019a7410-0000-7000-8000-000000000001",
+        "event_id": "019a7410-0000-7000-8000-000000000002",
+        "job_id": "fixture-job-1",
+        "attempt_id": "fixture-attempt-1",
+        "legacy_id": "9223372036854775807",
+        "duration_ms": 125.5,
+        "span_id": "2222222222222222"
+      }
+    },
+    {
+      "name": "negative_missing_span_id",
+      "valid": false,
+      "instance": {
+        "version": 1,
+        "timestamp": "2026-11-12T00:00:00Z",
+        "resource": {
+          "service.name": "runbrace-compatibility",
+          "service.version": "offline-prototype-v1",
+          "deployment.environment.name": "offline"
+        },
+        "operation": "handoff",
+        "outcome": "unknown",
+        "reason": "timeout",
+        "request_id": "019a7410-0000-7000-8000-000000000001",
+        "event_id": "019a7410-0000-7000-8000-000000000002",
+        "job_id": "fixture-job-1",
+        "attempt_id": "fixture-attempt-1",
+        "legacy_id": "9223372036854775807",
+        "duration_ms": 125.5,
+        "trace_id": "11111111111111111111111111111111"
+      }
+    },
+    {
+      "name": "negative_missing_version",
+      "valid": false,
+      "instance": {
+        "timestamp": "2026-11-12T00:00:00Z",
+        "resource": {
+          "service.name": "runbrace-compatibility",
+          "service.version": "offline-prototype-v1",
+          "deployment.environment.name": "offline"
+        },
+        "operation": "handoff",
+        "outcome": "unknown",
+        "reason": "timeout",
+        "request_id": "019a7410-0000-7000-8000-000000000001",
+        "event_id": "019a7410-0000-7000-8000-000000000002",
+        "job_id": "fixture-job-1",
+        "attempt_id": "fixture-attempt-1",
+        "legacy_id": "9223372036854775807",
+        "duration_ms": 125.5,
+        "trace_id": "11111111111111111111111111111111",
+        "span_id": "2222222222222222"
+      }
+    }
+  ]
+}

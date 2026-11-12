@@ -1,0 +1,515 @@
+{
+  "description": "Synthetic exact descriptor comparisons under a profile with proven native scope. This is not an occurrence-dedup or vendor-ID guarantee.",
+  "cases": [
+    {
+      "id": "same-after-label-change",
+      "note": "Display labels and endpoint URLs are outside this descriptor; enrollment proves continuity.",
+      "left": {
+        "instance_id": "019a6670-0000-7000-8000-000000000201",
+        "generation_id": "019a6670-0000-7000-8000-000000000202",
+        "entity": {
+          "kind": "dag_run",
+          "id": "42",
+          "parents": [
+            {
+              "kind": "dag",
+              "id": "daily-import"
+            }
+          ]
+        }
+      },
+      "right": {
+        "instance_id": "019a6670-0000-7000-8000-000000000201",
+        "generation_id": "019a6670-0000-7000-8000-000000000202",
+        "entity": {
+          "kind": "dag_run",
+          "id": "42",
+          "parents": [
+            {
+              "kind": "dag",
+              "id": "daily-import"
+            }
+          ]
+        }
+      },
+      "expected_same_resource": true
+    },
+    {
+      "id": "different-source",
+      "note": "Independent native authorities differ.",
+      "left": {
+        "instance_id": "019a6670-0000-7000-8000-000000000201",
+        "generation_id": "019a6670-0000-7000-8000-000000000202",
+        "entity": {
+          "kind": "dag_run",
+          "id": "42",
+          "parents": [
+            {
+              "kind": "dag",
+              "id": "daily-import"
+            }
+          ]
+        }
+      },
+      "right": {
+        "instance_id": "019a6670-0000-7000-8000-000000000211",
+        "generation_id": "019a6670-0000-7000-8000-000000000202",
+        "entity": {
+          "kind": "dag_run",
+          "id": "42",
+          "parents": [
+            {
+              "kind": "dag",
+              "id": "daily-import"
+            }
+          ]
+        }
+      },
+      "expected_same_resource": false
+    },
+    {
+      "id": "different-generation",
+      "note": "Reset and native-ID reuse do not merge namespaces.",
+      "left": {
+        "instance_id": "019a6670-0000-7000-8000-000000000201",
+        "generation_id": "019a6670-0000-7000-8000-000000000202",
+        "entity": {
+          "kind": "dag_run",
+          "id": "42",
+          "parents": [
+            {
+              "kind": "dag",
+              "id": "daily-import"
+            }
+          ]
+        }
+      },
+      "right": {
+        "instance_id": "019a6670-0000-7000-8000-000000000201",
+        "generation_id": "019a6670-0000-7000-8000-000000000212",
+        "entity": {
+          "kind": "dag_run",
+          "id": "42",
+          "parents": [
+            {
+              "kind": "dag",
+              "id": "daily-import"
+            }
+          ]
+        }
+      },
+      "expected_same_resource": false
+    },
+    {
+      "id": "different-parent",
+      "note": "Same run ID under a different DAG is distinct.",
+      "left": {
+        "instance_id": "019a6670-0000-7000-8000-000000000201",
+        "generation_id": "019a6670-0000-7000-8000-000000000202",
+        "entity": {
+          "kind": "dag_run",
+          "id": "42",
+          "parents": [
+            {
+              "kind": "dag",
+              "id": "daily-import"
+            }
+          ]
+        }
+      },
+      "right": {
+        "instance_id": "019a6670-0000-7000-8000-000000000201",
+        "generation_id": "019a6670-0000-7000-8000-000000000202",
+        "entity": {
+          "kind": "dag_run",
+          "id": "42",
+          "parents": [
+            {
+              "kind": "dag",
+              "id": "weekly-import"
+            }
+          ]
+        }
+      },
+      "expected_same_resource": false
+    },
+    {
+      "id": "leading-zero",
+      "note": "Native strings 42 and 042 stay distinct.",
+      "left": {
+        "instance_id": "019a6670-0000-7000-8000-000000000201",
+        "generation_id": "019a6670-0000-7000-8000-000000000202",
+        "entity": {
+          "kind": "dag_run",
+          "id": "42",
+          "parents": [
+            {
+              "kind": "dag",
+              "id": "daily-import"
+            }
+          ]
+        }
+      },
+      "right": {
+        "instance_id": "019a6670-0000-7000-8000-000000000201",
+        "generation_id": "019a6670-0000-7000-8000-000000000202",
+        "entity": {
+          "kind": "dag_run",
+          "id": "042",
+          "parents": [
+            {
+              "kind": "dag",
+              "id": "daily-import"
+            }
+          ]
+        }
+      },
+      "expected_same_resource": false
+    },
+    {
+      "id": "case-sensitive",
+      "note": "A native profile must explicitly justify any alternate equality.",
+      "left": {
+        "instance_id": "019a6670-0000-7000-8000-000000000201",
+        "generation_id": "019a6670-0000-7000-8000-000000000202",
+        "entity": {
+          "kind": "dag_run",
+          "id": "RunA",
+          "parents": [
+            {
+              "kind": "dag",
+              "id": "daily-import"
+            }
+          ]
+        }
+      },
+      "right": {
+        "instance_id": "019a6670-0000-7000-8000-000000000201",
+        "generation_id": "019a6670-0000-7000-8000-000000000202",
+        "entity": {
+          "kind": "dag_run",
+          "id": "runa",
+          "parents": [
+            {
+              "kind": "dag",
+              "id": "daily-import"
+            }
+          ]
+        }
+      },
+      "expected_same_resource": false
+    },
+    {
+      "id": "whitespace",
+      "note": "Do not trim a native string into another ID.",
+      "left": {
+        "instance_id": "019a6670-0000-7000-8000-000000000201",
+        "generation_id": "019a6670-0000-7000-8000-000000000202",
+        "entity": {
+          "kind": "dag_run",
+          "id": "42",
+          "parents": [
+            {
+              "kind": "dag",
+              "id": "daily-import"
+            }
+          ]
+        }
+      },
+      "right": {
+        "instance_id": "019a6670-0000-7000-8000-000000000201",
+        "generation_id": "019a6670-0000-7000-8000-000000000202",
+        "entity": {
+          "kind": "dag_run",
+          "id": "42 ",
+          "parents": [
+            {
+              "kind": "dag",
+              "id": "daily-import"
+            }
+          ]
+        }
+      },
+      "expected_same_resource": false
+    },
+    {
+      "id": "unicode-normalization",
+      "note": "Composed and decomposed text stay distinct without explicit native conversion.",
+      "left": {
+        "instance_id": "019a6670-0000-7000-8000-000000000201",
+        "generation_id": "019a6670-0000-7000-8000-000000000202",
+        "entity": {
+          "kind": "dag_run",
+          "id": "�",
+          "parents": [
+            {
+              "kind": "dag",
+              "id": "daily-import"
+            }
+          ]
+        }
+      },
+      "right": {
+        "instance_id": "019a6670-0000-7000-8000-000000000201",
+        "generation_id": "019a6670-0000-7000-8000-000000000202",
+        "entity": {
+          "kind": "dag_run",
+          "id": "e'",
+          "parents": [
+            {
+              "kind": "dag",
+              "id": "daily-import"
+            }
+          ]
+        }
+      },
+      "expected_same_resource": false
+    },
+    {
+      "id": "foreign-uuid",
+      "note": "A native UUID-looking v4 ID is allowed and remains opaque.",
+      "left": {
+        "instance_id": "019a6670-0000-7000-8000-000000000201",
+        "generation_id": "019a6670-0000-7000-8000-000000000202",
+        "entity": {
+          "kind": "dag_run",
+          "id": "550e8400-e29b-41d4-a716-446655440000",
+          "parents": [
+            {
+              "kind": "dag",
+              "id": "daily-import"
+            }
+          ]
+        }
+      },
+      "right": {
+        "instance_id": "019a6670-0000-7000-8000-000000000201",
+        "generation_id": "019a6670-0000-7000-8000-000000000202",
+        "entity": {
+          "kind": "dag_run",
+          "id": "550e8400-e29b-41d4-a716-446655440000",
+          "parents": [
+            {
+              "kind": "dag",
+              "id": "daily-import"
+            }
+          ]
+        }
+      },
+      "expected_same_resource": true
+    },
+    {
+      "id": "same-incarnation",
+      "note": "A tested stable native creation token identifies one reuse epoch.",
+      "left": {
+        "instance_id": "019a6670-0000-7000-8000-000000000201",
+        "generation_id": "019a6670-0000-7000-8000-000000000202",
+        "entity": {
+          "kind": "dag_run",
+          "id": "42",
+          "parents": [
+            {
+              "kind": "dag",
+              "id": "daily-import"
+            }
+          ],
+          "incarnation": "native-created-A"
+        }
+      },
+      "right": {
+        "instance_id": "019a6670-0000-7000-8000-000000000201",
+        "generation_id": "019a6670-0000-7000-8000-000000000202",
+        "entity": {
+          "kind": "dag_run",
+          "id": "42",
+          "parents": [
+            {
+              "kind": "dag",
+              "id": "daily-import"
+            }
+          ],
+          "incarnation": "native-created-A"
+        }
+      },
+      "expected_same_resource": true
+    },
+    {
+      "id": "different-incarnation",
+      "note": "Same ID reused for a different native resource stays distinct.",
+      "left": {
+        "instance_id": "019a6670-0000-7000-8000-000000000201",
+        "generation_id": "019a6670-0000-7000-8000-000000000202",
+        "entity": {
+          "kind": "dag_run",
+          "id": "42",
+          "parents": [
+            {
+              "kind": "dag",
+              "id": "daily-import"
+            }
+          ],
+          "incarnation": "native-created-A"
+        }
+      },
+      "right": {
+        "instance_id": "019a6670-0000-7000-8000-000000000201",
+        "generation_id": "019a6670-0000-7000-8000-000000000202",
+        "entity": {
+          "kind": "dag_run",
+          "id": "42",
+          "parents": [
+            {
+              "kind": "dag",
+              "id": "daily-import"
+            }
+          ],
+          "incarnation": "native-created-B"
+        }
+      },
+      "expected_same_resource": false
+    },
+    {
+      "id": "missing-incarnation",
+      "note": "An absent token is not an alias for a supplied incarnation.",
+      "left": {
+        "instance_id": "019a6670-0000-7000-8000-000000000201",
+        "generation_id": "019a6670-0000-7000-8000-000000000202",
+        "entity": {
+          "kind": "dag_run",
+          "id": "42",
+          "parents": [
+            {
+              "kind": "dag",
+              "id": "daily-import"
+            }
+          ]
+        }
+      },
+      "right": {
+        "instance_id": "019a6670-0000-7000-8000-000000000201",
+        "generation_id": "019a6670-0000-7000-8000-000000000202",
+        "entity": {
+          "kind": "dag_run",
+          "id": "42",
+          "parents": [
+            {
+              "kind": "dag",
+              "id": "daily-import"
+            }
+          ],
+          "incarnation": "native-created-A"
+        }
+      },
+      "expected_same_resource": false
+    },
+    {
+      "id": "parent-order",
+      "note": "Nested native scope is ordered, never sorted for equality.",
+      "left": {
+        "instance_id": "019a6670-0000-7000-8000-000000000201",
+        "generation_id": "019a6670-0000-7000-8000-000000000202",
+        "entity": {
+          "kind": "dag_run",
+          "id": "42",
+          "parents": [
+            {
+              "kind": "workspace",
+              "id": "one"
+            },
+            {
+              "kind": "dag",
+              "id": "two"
+            }
+          ]
+        }
+      },
+      "right": {
+        "instance_id": "019a6670-0000-7000-8000-000000000201",
+        "generation_id": "019a6670-0000-7000-8000-000000000202",
+        "entity": {
+          "kind": "dag_run",
+          "id": "42",
+          "parents": [
+            {
+              "kind": "dag",
+              "id": "two"
+            },
+            {
+              "kind": "workspace",
+              "id": "one"
+            }
+          ]
+        }
+      },
+      "expected_same_resource": false
+    },
+    {
+      "id": "parent-incarnation",
+      "note": "A parent native namespace may itself be reused.",
+      "left": {
+        "instance_id": "019a6670-0000-7000-8000-000000000201",
+        "generation_id": "019a6670-0000-7000-8000-000000000202",
+        "entity": {
+          "kind": "dag_run",
+          "id": "42",
+          "parents": [
+            {
+              "kind": "dag",
+              "id": "daily-import",
+              "incarnation": "native-A"
+            }
+          ]
+        }
+      },
+      "right": {
+        "instance_id": "019a6670-0000-7000-8000-000000000201",
+        "generation_id": "019a6670-0000-7000-8000-000000000202",
+        "entity": {
+          "kind": "dag_run",
+          "id": "42",
+          "parents": [
+            {
+              "kind": "dag",
+              "id": "daily-import",
+              "incarnation": "native-B"
+            }
+          ]
+        }
+      },
+      "expected_same_resource": false
+    },
+    {
+      "id": "delimiter-ambiguity",
+      "note": "Both would flatten to a:b:c with naive concatenation; components remain distinct.",
+      "left": {
+        "instance_id": "019a6670-0000-7000-8000-000000000201",
+        "generation_id": "019a6670-0000-7000-8000-000000000202",
+        "entity": {
+          "kind": "dag_run",
+          "id": "c",
+          "parents": [
+            {
+              "kind": "dag",
+              "id": "a:b"
+            }
+          ]
+        }
+      },
+      "right": {
+        "instance_id": "019a6670-0000-7000-8000-000000000201",
+        "generation_id": "019a6670-0000-7000-8000-000000000202",
+        "entity": {
+          "kind": "dag_run",
+          "id": "b:c",
+          "parents": [
+            {
+              "kind": "dag",
+              "id": "a"
+            }
+          ]
+        }
+      },
+      "expected_same_resource": false
+    }
+  ]
+}

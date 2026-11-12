@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:runbrace:schema:sabnzbd-history-retained:1",
+  "title": "Runbrace draft minimal retained SAB history v1",
+  "description": "Closed two-field projection for the fixed-message mapping proof.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "history"
+  ],
+  "properties": {
+    "history": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "slots"
+      ],
+      "properties": {
+        "slots": {
+          "type": "array",
+          "maxItems": 100,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "nzo_id",
+              "status"
+            ],
+            "properties": {
+              "nzo_id": {
+                "$ref": "urn:runbrace:schema:identity:1#/$defs/opaque_id"
+              },
+              "status": {
+                "$ref": "urn:runbrace:schema:sabnzbd-history-input:1#/properties/history/properties/slots/items/properties/status"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

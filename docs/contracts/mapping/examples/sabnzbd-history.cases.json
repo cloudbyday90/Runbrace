@@ -1,0 +1,932 @@
+{
+  "description": "Synthetic review expectations, not outputs produced by a runtime mapper.",
+  "mapping_profile": "sabnzbd.history_status",
+  "mapping_version": "2026-11-09.1",
+  "trusted_context": "../../input/examples/sabnzbd-history.context.json",
+  "cases": [
+    {
+      "case_id": "failed",
+      "note": "Reported failure; native free text does not create an unpack-stage code.",
+      "native": {
+        "history": {
+          "noofslots": 1,
+          "last_history_update": 1794232800,
+          "slots": [
+            {
+              "nzo_id": "SABnzbd_nzo_example42",
+              "status": "Failed",
+              "fail_message": "Example archive could not be unpacked.",
+              "name": "Example download",
+              "password": "",
+              "storage": "EXAMPLE_STORAGE"
+            }
+          ]
+        }
+      },
+      "expected": {
+        "outcome": "emit",
+        "conditions": [
+          {
+            "item_key": "history/0/download_status",
+            "identity": {
+              "mode": "unkeyed",
+              "policy_version": "sabnzbd.history_snapshot_unkeyed_v1"
+            },
+            "entity": {
+              "kind": "download",
+              "id": "SABnzbd_nzo_example42"
+            },
+            "condition": {
+              "name": "download.failed",
+              "state": "failing",
+              "severity": "error",
+              "message": "SABnzbd reported a failed download.",
+              "native_state": "Failed"
+            },
+            "observation_kind": "snapshot",
+            "observation_time_basis": "collector_observed",
+            "observed_at": "2026-11-09T14:00:00Z"
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "completed",
+      "note": "Informational completion does not establish successful media import.",
+      "native": {
+        "history": {
+          "slots": [
+            {
+              "nzo_id": "SABnzbd_nzo_example42",
+              "status": "Completed"
+            }
+          ]
+        }
+      },
+      "expected": {
+        "outcome": "emit",
+        "conditions": [
+          {
+            "item_key": "history/0/download_status",
+            "identity": {
+              "mode": "unkeyed",
+              "policy_version": "sabnzbd.history_snapshot_unkeyed_v1"
+            },
+            "entity": {
+              "kind": "download",
+              "id": "SABnzbd_nzo_example42"
+            },
+            "condition": {
+              "name": "download.completed",
+              "state": "informational",
+              "severity": "info",
+              "message": "SABnzbd reported a completed download.",
+              "native_state": "Completed"
+            },
+            "observation_kind": "snapshot",
+            "observation_time_basis": "collector_observed",
+            "observed_at": "2026-11-09T14:00:00Z"
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "processing-queued",
+      "note": "Exact history processing status.",
+      "native": {
+        "history": {
+          "slots": [
+            {
+              "nzo_id": "SABnzbd_nzo_example42",
+              "status": "Queued"
+            }
+          ]
+        }
+      },
+      "expected": {
+        "outcome": "emit",
+        "conditions": [
+          {
+            "item_key": "history/0/download_status",
+            "identity": {
+              "mode": "unkeyed",
+              "policy_version": "sabnzbd.history_snapshot_unkeyed_v1"
+            },
+            "entity": {
+              "kind": "download",
+              "id": "SABnzbd_nzo_example42"
+            },
+            "condition": {
+              "name": "download.progress",
+              "state": "informational",
+              "severity": "info",
+              "message": "SABnzbd reported download post-processing activity.",
+              "native_state": "Queued"
+            },
+            "observation_kind": "snapshot",
+            "observation_time_basis": "collector_observed",
+            "observed_at": "2026-11-09T14:00:00Z"
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "processing-quickcheck",
+      "note": "Exact history processing status.",
+      "native": {
+        "history": {
+          "slots": [
+            {
+              "nzo_id": "SABnzbd_nzo_example42",
+              "status": "QuickCheck"
+            }
+          ]
+        }
+      },
+      "expected": {
+        "outcome": "emit",
+        "conditions": [
+          {
+            "item_key": "history/0/download_status",
+            "identity": {
+              "mode": "unkeyed",
+              "policy_version": "sabnzbd.history_snapshot_unkeyed_v1"
+            },
+            "entity": {
+              "kind": "download",
+              "id": "SABnzbd_nzo_example42"
+            },
+            "condition": {
+              "name": "download.progress",
+              "state": "informational",
+              "severity": "info",
+              "message": "SABnzbd reported download post-processing activity.",
+              "native_state": "QuickCheck"
+            },
+            "observation_kind": "snapshot",
+            "observation_time_basis": "collector_observed",
+            "observed_at": "2026-11-09T14:00:00Z"
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "processing-verifying",
+      "note": "Exact history processing status.",
+      "native": {
+        "history": {
+          "slots": [
+            {
+              "nzo_id": "SABnzbd_nzo_example42",
+              "status": "Verifying"
+            }
+          ]
+        }
+      },
+      "expected": {
+        "outcome": "emit",
+        "conditions": [
+          {
+            "item_key": "history/0/download_status",
+            "identity": {
+              "mode": "unkeyed",
+              "policy_version": "sabnzbd.history_snapshot_unkeyed_v1"
+            },
+            "entity": {
+              "kind": "download",
+              "id": "SABnzbd_nzo_example42"
+            },
+            "condition": {
+              "name": "download.progress",
+              "state": "informational",
+              "severity": "info",
+              "message": "SABnzbd reported download post-processing activity.",
+              "native_state": "Verifying"
+            },
+            "observation_kind": "snapshot",
+            "observation_time_basis": "collector_observed",
+            "observed_at": "2026-11-09T14:00:00Z"
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "processing-repairing",
+      "note": "Exact history processing status.",
+      "native": {
+        "history": {
+          "slots": [
+            {
+              "nzo_id": "SABnzbd_nzo_example42",
+              "status": "Repairing"
+            }
+          ]
+        }
+      },
+      "expected": {
+        "outcome": "emit",
+        "conditions": [
+          {
+            "item_key": "history/0/download_status",
+            "identity": {
+              "mode": "unkeyed",
+              "policy_version": "sabnzbd.history_snapshot_unkeyed_v1"
+            },
+            "entity": {
+              "kind": "download",
+              "id": "SABnzbd_nzo_example42"
+            },
+            "condition": {
+              "name": "download.progress",
+              "state": "informational",
+              "severity": "info",
+              "message": "SABnzbd reported download post-processing activity.",
+              "native_state": "Repairing"
+            },
+            "observation_kind": "snapshot",
+            "observation_time_basis": "collector_observed",
+            "observed_at": "2026-11-09T14:00:00Z"
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "processing-fetching",
+      "note": "Exact history processing status.",
+      "native": {
+        "history": {
+          "slots": [
+            {
+              "nzo_id": "SABnzbd_nzo_example42",
+              "status": "Fetching"
+            }
+          ]
+        }
+      },
+      "expected": {
+        "outcome": "emit",
+        "conditions": [
+          {
+            "item_key": "history/0/download_status",
+            "identity": {
+              "mode": "unkeyed",
+              "policy_version": "sabnzbd.history_snapshot_unkeyed_v1"
+            },
+            "entity": {
+              "kind": "download",
+              "id": "SABnzbd_nzo_example42"
+            },
+            "condition": {
+              "name": "download.progress",
+              "state": "informational",
+              "severity": "info",
+              "message": "SABnzbd reported download post-processing activity.",
+              "native_state": "Fetching"
+            },
+            "observation_kind": "snapshot",
+            "observation_time_basis": "collector_observed",
+            "observed_at": "2026-11-09T14:00:00Z"
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "processing-extracting",
+      "note": "Exact history processing status.",
+      "native": {
+        "history": {
+          "slots": [
+            {
+              "nzo_id": "SABnzbd_nzo_example42",
+              "status": "Extracting"
+            }
+          ]
+        }
+      },
+      "expected": {
+        "outcome": "emit",
+        "conditions": [
+          {
+            "item_key": "history/0/download_status",
+            "identity": {
+              "mode": "unkeyed",
+              "policy_version": "sabnzbd.history_snapshot_unkeyed_v1"
+            },
+            "entity": {
+              "kind": "download",
+              "id": "SABnzbd_nzo_example42"
+            },
+            "condition": {
+              "name": "download.progress",
+              "state": "informational",
+              "severity": "info",
+              "message": "SABnzbd reported download post-processing activity.",
+              "native_state": "Extracting"
+            },
+            "observation_kind": "snapshot",
+            "observation_time_basis": "collector_observed",
+            "observed_at": "2026-11-09T14:00:00Z"
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "processing-moving",
+      "note": "Exact history processing status.",
+      "native": {
+        "history": {
+          "slots": [
+            {
+              "nzo_id": "SABnzbd_nzo_example42",
+              "status": "Moving"
+            }
+          ]
+        }
+      },
+      "expected": {
+        "outcome": "emit",
+        "conditions": [
+          {
+            "item_key": "history/0/download_status",
+            "identity": {
+              "mode": "unkeyed",
+              "policy_version": "sabnzbd.history_snapshot_unkeyed_v1"
+            },
+            "entity": {
+              "kind": "download",
+              "id": "SABnzbd_nzo_example42"
+            },
+            "condition": {
+              "name": "download.progress",
+              "state": "informational",
+              "severity": "info",
+              "message": "SABnzbd reported download post-processing activity.",
+              "native_state": "Moving"
+            },
+            "observation_kind": "snapshot",
+            "observation_time_basis": "collector_observed",
+            "observed_at": "2026-11-09T14:00:00Z"
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "processing-running",
+      "note": "Exact history processing status.",
+      "native": {
+        "history": {
+          "slots": [
+            {
+              "nzo_id": "SABnzbd_nzo_example42",
+              "status": "Running"
+            }
+          ]
+        }
+      },
+      "expected": {
+        "outcome": "emit",
+        "conditions": [
+          {
+            "item_key": "history/0/download_status",
+            "identity": {
+              "mode": "unkeyed",
+              "policy_version": "sabnzbd.history_snapshot_unkeyed_v1"
+            },
+            "entity": {
+              "kind": "download",
+              "id": "SABnzbd_nzo_example42"
+            },
+            "condition": {
+              "name": "download.progress",
+              "state": "informational",
+              "severity": "info",
+              "message": "SABnzbd reported download post-processing activity.",
+              "native_state": "Running"
+            },
+            "observation_kind": "snapshot",
+            "observation_time_basis": "collector_observed",
+            "observed_at": "2026-11-09T14:00:00Z"
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "unfamiliar",
+      "note": "Valid unfamiliar native status stays exact and unknown.",
+      "native": {
+        "history": {
+          "slots": [
+            {
+              "nzo_id": "SABnzbd_nzo_example42",
+              "status": "VendorFutureState"
+            }
+          ]
+        }
+      },
+      "expected": {
+        "outcome": "emit",
+        "conditions": [
+          {
+            "item_key": "history/0/download_status",
+            "identity": {
+              "mode": "unkeyed",
+              "policy_version": "sabnzbd.history_snapshot_unkeyed_v1"
+            },
+            "entity": {
+              "kind": "download",
+              "id": "SABnzbd_nzo_example42"
+            },
+            "condition": {
+              "name": "download.status",
+              "state": "unknown",
+              "severity": "unknown",
+              "message": "SABnzbd reported an unrecognized download status.",
+              "native_state": "VendorFutureState"
+            },
+            "observation_kind": "snapshot",
+            "observation_time_basis": "collector_observed",
+            "observed_at": "2026-11-09T14:00:00Z"
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "case-sensitive",
+      "note": "Valid unfamiliar native status stays exact and unknown.",
+      "native": {
+        "history": {
+          "slots": [
+            {
+              "nzo_id": "SABnzbd_nzo_example42",
+              "status": "failed"
+            }
+          ]
+        }
+      },
+      "expected": {
+        "outcome": "emit",
+        "conditions": [
+          {
+            "item_key": "history/0/download_status",
+            "identity": {
+              "mode": "unkeyed",
+              "policy_version": "sabnzbd.history_snapshot_unkeyed_v1"
+            },
+            "entity": {
+              "kind": "download",
+              "id": "SABnzbd_nzo_example42"
+            },
+            "condition": {
+              "name": "download.status",
+              "state": "unknown",
+              "severity": "unknown",
+              "message": "SABnzbd reported an unrecognized download status.",
+              "native_state": "failed"
+            },
+            "observation_kind": "snapshot",
+            "observation_time_basis": "collector_observed",
+            "observed_at": "2026-11-09T14:00:00Z"
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "no-trim",
+      "note": "Valid unfamiliar native status stays exact and unknown.",
+      "native": {
+        "history": {
+          "slots": [
+            {
+              "nzo_id": "SABnzbd_nzo_example42",
+              "status": "Failed "
+            }
+          ]
+        }
+      },
+      "expected": {
+        "outcome": "emit",
+        "conditions": [
+          {
+            "item_key": "history/0/download_status",
+            "identity": {
+              "mode": "unkeyed",
+              "policy_version": "sabnzbd.history_snapshot_unkeyed_v1"
+            },
+            "entity": {
+              "kind": "download",
+              "id": "SABnzbd_nzo_example42"
+            },
+            "condition": {
+              "name": "download.status",
+              "state": "unknown",
+              "severity": "unknown",
+              "message": "SABnzbd reported an unrecognized download status.",
+              "native_state": "Failed "
+            },
+            "observation_kind": "snapshot",
+            "observation_time_basis": "collector_observed",
+            "observed_at": "2026-11-09T14:00:00Z"
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "queue-state-not-borrowed",
+      "note": "Valid unfamiliar native status stays exact and unknown.",
+      "native": {
+        "history": {
+          "slots": [
+            {
+              "nzo_id": "SABnzbd_nzo_example42",
+              "status": "Downloading"
+            }
+          ]
+        }
+      },
+      "expected": {
+        "outcome": "emit",
+        "conditions": [
+          {
+            "item_key": "history/0/download_status",
+            "identity": {
+              "mode": "unkeyed",
+              "policy_version": "sabnzbd.history_snapshot_unkeyed_v1"
+            },
+            "entity": {
+              "kind": "download",
+              "id": "SABnzbd_nzo_example42"
+            },
+            "condition": {
+              "name": "download.status",
+              "state": "unknown",
+              "severity": "unknown",
+              "message": "SABnzbd reported an unrecognized download status.",
+              "native_state": "Downloading"
+            },
+            "observation_kind": "snapshot",
+            "observation_time_basis": "collector_observed",
+            "observed_at": "2026-11-09T14:00:00Z"
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "discard-optional-native-fields",
+      "note": "Paths, passwords, caller-looking IDs, and fail_message are outside the retained projection.",
+      "native": {
+        "history": {
+          "slots": [
+            {
+              "nzo_id": "SABnzbd_nzo_example42",
+              "status": "Failed",
+              "fail_message": "Synthetic secret text must be discarded.",
+              "storage": "synthetic-private-path",
+              "password": "synthetic-token",
+              "event_id": "caller-selected",
+              "attributes": {
+                "runbrace.mapping_version": "caller-selected"
+              }
+            }
+          ]
+        }
+      },
+      "expected": {
+        "outcome": "emit",
+        "conditions": [
+          {
+            "item_key": "history/0/download_status",
+            "identity": {
+              "mode": "unkeyed",
+              "policy_version": "sabnzbd.history_snapshot_unkeyed_v1"
+            },
+            "entity": {
+              "kind": "download",
+              "id": "SABnzbd_nzo_example42"
+            },
+            "condition": {
+              "name": "download.failed",
+              "state": "failing",
+              "severity": "error",
+              "message": "SABnzbd reported a failed download.",
+              "native_state": "Failed"
+            },
+            "observation_kind": "snapshot",
+            "observation_time_basis": "collector_observed",
+            "observed_at": "2026-11-09T14:00:00Z"
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "leading-zero-native-id",
+      "note": "Native IDs remain strings with zeros intact.",
+      "native": {
+        "history": {
+          "slots": [
+            {
+              "nzo_id": "00042",
+              "status": "Failed"
+            }
+          ]
+        }
+      },
+      "expected": {
+        "outcome": "emit",
+        "conditions": [
+          {
+            "item_key": "history/0/download_status",
+            "identity": {
+              "mode": "unkeyed",
+              "policy_version": "sabnzbd.history_snapshot_unkeyed_v1"
+            },
+            "entity": {
+              "kind": "download",
+              "id": "00042"
+            },
+            "condition": {
+              "name": "download.failed",
+              "state": "failing",
+              "severity": "error",
+              "message": "SABnzbd reported a failed download.",
+              "native_state": "Failed"
+            },
+            "observation_kind": "snapshot",
+            "observation_time_basis": "collector_observed",
+            "observed_at": "2026-11-09T14:00:00Z"
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "valid-mixed-batch",
+      "note": "Known and valid unfamiliar values can publish together.",
+      "native": {
+        "history": {
+          "slots": [
+            {
+              "nzo_id": "job-a",
+              "status": "Completed"
+            },
+            {
+              "nzo_id": "job-b",
+              "status": "VendorFutureState"
+            }
+          ]
+        }
+      },
+      "expected": {
+        "outcome": "emit",
+        "conditions": [
+          {
+            "item_key": "history/0/download_status",
+            "identity": {
+              "mode": "unkeyed",
+              "policy_version": "sabnzbd.history_snapshot_unkeyed_v1"
+            },
+            "entity": {
+              "kind": "download",
+              "id": "job-a"
+            },
+            "condition": {
+              "name": "download.completed",
+              "state": "informational",
+              "severity": "info",
+              "message": "SABnzbd reported a completed download.",
+              "native_state": "Completed"
+            },
+            "observation_kind": "snapshot",
+            "observation_time_basis": "collector_observed",
+            "observed_at": "2026-11-09T14:00:00Z"
+          },
+          {
+            "item_key": "history/1/download_status",
+            "identity": {
+              "mode": "unkeyed",
+              "policy_version": "sabnzbd.history_snapshot_unkeyed_v1"
+            },
+            "entity": {
+              "kind": "download",
+              "id": "job-b"
+            },
+            "condition": {
+              "name": "download.status",
+              "state": "unknown",
+              "severity": "unknown",
+              "message": "SABnzbd reported an unrecognized download status.",
+              "native_state": "VendorFutureState"
+            },
+            "observation_kind": "snapshot",
+            "observation_time_basis": "collector_observed",
+            "observed_at": "2026-11-09T14:00:00Z"
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "empty-collection",
+      "note": "An empty selected collection reports no condition and makes no health/coverage claim.",
+      "native": {
+        "history": {
+          "slots": []
+        }
+      },
+      "expected": {
+        "outcome": "ignore",
+        "reason_code": "mapping.empty_collection",
+        "field_pointer": "/history/slots"
+      }
+    },
+    {
+      "case_id": "missing-status",
+      "note": "Required absence is not unknown or healthy.",
+      "native": {
+        "history": {
+          "slots": [
+            {
+              "nzo_id": "SABnzbd_nzo_example42"
+            }
+          ]
+        }
+      },
+      "expected": {
+        "outcome": "quarantine",
+        "reason_code": "mapping.required_missing",
+        "field_pointer": "/history/slots/0/status"
+      }
+    },
+    {
+      "case_id": "null-status",
+      "note": "Invalid required status quarantines the entire receipt.",
+      "native": {
+        "history": {
+          "slots": [
+            {
+              "nzo_id": "SABnzbd_nzo_example42",
+              "status": null
+            }
+          ]
+        }
+      },
+      "expected": {
+        "outcome": "quarantine",
+        "reason_code": "mapping.type_mismatch",
+        "field_pointer": "/history/slots/0/status"
+      }
+    },
+    {
+      "case_id": "number-status",
+      "note": "Invalid required status quarantines the entire receipt.",
+      "native": {
+        "history": {
+          "slots": [
+            {
+              "nzo_id": "SABnzbd_nzo_example42",
+              "status": 1
+            }
+          ]
+        }
+      },
+      "expected": {
+        "outcome": "quarantine",
+        "reason_code": "mapping.type_mismatch",
+        "field_pointer": "/history/slots/0/status"
+      }
+    },
+    {
+      "case_id": "empty-status",
+      "note": "Invalid required status quarantines the entire receipt.",
+      "native": {
+        "history": {
+          "slots": [
+            {
+              "nzo_id": "SABnzbd_nzo_example42",
+              "status": ""
+            }
+          ]
+        }
+      },
+      "expected": {
+        "outcome": "quarantine",
+        "reason_code": "mapping.invalid_value",
+        "field_pointer": "/history/slots/0/status"
+      }
+    },
+    {
+      "case_id": "control-status",
+      "note": "Invalid required status quarantines the entire receipt.",
+      "native": {
+        "history": {
+          "slots": [
+            {
+              "nzo_id": "SABnzbd_nzo_example42",
+              "status": "Failed\n"
+            }
+          ]
+        }
+      },
+      "expected": {
+        "outcome": "quarantine",
+        "reason_code": "mapping.invalid_value",
+        "field_pointer": "/history/slots/0/status"
+      }
+    },
+    {
+      "case_id": "overlong-status",
+      "note": "Invalid required status quarantines the entire receipt.",
+      "native": {
+        "history": {
+          "slots": [
+            {
+              "nzo_id": "SABnzbd_nzo_example42",
+              "status": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+            }
+          ]
+        }
+      },
+      "expected": {
+        "outcome": "quarantine",
+        "reason_code": "mapping.invalid_value",
+        "field_pointer": "/history/slots/0/status"
+      }
+    },
+    {
+      "case_id": "missing-id",
+      "note": "Identity cannot be defaulted.",
+      "native": {
+        "history": {
+          "slots": [
+            {
+              "status": "Failed"
+            }
+          ]
+        }
+      },
+      "expected": {
+        "outcome": "quarantine",
+        "reason_code": "mapping.required_missing",
+        "field_pointer": "/history/slots/0/nzo_id"
+      }
+    },
+    {
+      "case_id": "numeric-id",
+      "note": "No implicit numeric identity conversion.",
+      "native": {
+        "history": {
+          "slots": [
+            {
+              "nzo_id": 42,
+              "status": "Failed"
+            }
+          ]
+        }
+      },
+      "expected": {
+        "outcome": "quarantine",
+        "reason_code": "mapping.type_mismatch",
+        "field_pointer": "/history/slots/0/nzo_id"
+      }
+    },
+    {
+      "case_id": "empty-id",
+      "note": "No invented entity ID.",
+      "native": {
+        "history": {
+          "slots": [
+            {
+              "nzo_id": "",
+              "status": "Failed"
+            }
+          ]
+        }
+      },
+      "expected": {
+        "outcome": "quarantine",
+        "reason_code": "mapping.invalid_value",
+        "field_pointer": "/history/slots/0/nzo_id"
+      }
+    },
+    {
+      "case_id": "invalid-mixed-batch",
+      "note": "One invalid item prevents partial publication.",
+      "native": {
+        "history": {
+          "slots": [
+            {
+              "nzo_id": "job-a",
+              "status": "Failed"
+            },
+            {
+              "nzo_id": "job-b",
+              "status": null
+            }
+          ]
+        }
+      },
+      "expected": {
+        "outcome": "quarantine",
+        "reason_code": "mapping.type_mismatch",
+        "field_pointer": "/history/slots/1/status"
+      }
+    }
+  ]
+}

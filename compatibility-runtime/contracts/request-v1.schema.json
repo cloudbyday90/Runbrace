@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:runbrace:compatibility:fixture-request:1",
+  "title": "Synthetic compatibility runtime request (not a recovery contract)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "idempotency_key", "operation", "ack_generation", "arguments"],
+  "properties": {
+    "version": {"const": 1, "type": "integer"},
+    "idempotency_key": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}$"},
+    "operation": {"const": "fixture.scan"},
+    "ack_generation": {"type": "integer", "minimum": 1, "maximum": 2147483647},
+    "arguments": {
+      "type": "object", "additionalProperties": false, "required": ["records", "mode"],
+      "properties": {
+        "records": {"type": "integer", "minimum": 1, "maximum": 1000000},
+        "mode": {"enum": ["clean", "nonzero", "timeout", "overflow", "invalid"]}
+      }
+    }
+  }
+}

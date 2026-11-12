@@ -1,0 +1,50 @@
+{
+  "description": "Synthetic valid retained input after bounded artifact/preparation retries; no compiled bundle is available.",
+  "source": {
+    "instance_id": "019a6670-0000-7000-8000-000000000101",
+    "generation_id": "019a6670-0000-7000-8000-000000000102",
+    "service": "sabnzbd"
+  },
+  "receipt": {
+    "schema_version": 1,
+    "receipt_id": "019a6670-0000-7000-8000-000000000420",
+    "status": "quarantined",
+    "duplicate": false
+  },
+  "input_evidence_kind": "replayable",
+  "input_availability": "retained",
+  "input_profile": "sabnzbd.history_status_v1",
+  "projection_version": "sabnzbd.history_identity_status_v1",
+  "mapping_profile": "sabnzbd.history_status",
+  "mapping_version": "2026-11-09.1",
+  "processing_count": 3,
+  "input_json": {
+    "history": {
+      "slots": [
+        {
+          "nzo_id": "SABnzbd_nzo_example42",
+          "status": "Failed"
+        }
+      ]
+    }
+  },
+  "quarantine_detail": {
+    "schema_version": 1,
+    "reason_code": "mapping.bundle_unavailable",
+    "stage": "processing",
+    "input_evidence_kind": "replayable",
+    "affected_item_count": 1,
+    "automatic_retry": false,
+    "recovery_requirement": "artifact_recovery"
+  },
+  "created_work": {
+    "condition_events": 0,
+    "receipt_event_links": 0,
+    "event_deliveries": 0,
+    "indexing_jobs": 0
+  },
+  "review": {
+    "reprocessing_allowed": false,
+    "blocking_reason": "artifact_recovery_required"
+  }
+}

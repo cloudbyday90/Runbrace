@@ -1,0 +1,16 @@
+{
+  "history": {
+    "noofslots": 1,
+    "last_history_update": 1794232800,
+    "slots": [
+      {
+        "nzo_id": "SABnzbd_nzo_example42",
+        "status": "Failed",
+        "fail_message": "Example archive could not be unpacked.",
+        "name": "Example download",
+        "password": "",
+        "storage": "EXAMPLE_STORAGE"
+      }
+    ]
+  }
+}

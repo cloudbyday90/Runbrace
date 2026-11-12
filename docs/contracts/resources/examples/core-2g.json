@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "profile_key": "core_2g_illustrative_v1",
+  "status": "illustrative_unmeasured",
+  "scope": "rust_app_and_postgresql_only",
+  "core_total_limit_mib": 2048,
+  "host_reserve_mib": null,
+  "embedding": {
+    "runtime": "unselected",
+    "limit_mib": null,
+    "excluded_from_core_total": true
+  },
+  "swap_policy": "no_additional_container_swap",
+  "vector_search_mode": "exact_baseline",
+  "postgresql": {
+    "limit_mib": 1536,
+    "shared_buffers_mib": 256,
+    "wal_buffers_mib": 16,
+    "work_mem_mib": 2,
+    "hash_mem_multiplier": 2,
+    "maintenance_work_mem_mib": 64,
+    "autovacuum_work_mem_mib": 32,
+    "autovacuum_max_workers": 2,
+    "max_connections": 20,
+    "superuser_reserved_connections": 3,
+    "other_reserved_connections": 0,
+    "max_parallel_workers_per_gather": 0,
+    "max_parallel_maintenance_workers": 0,
+    "temp_buffers_mib": 8,
+    "temp_file_limit_mib": 256,
+    "effective_cache_size_mib": 512,
+    "shm_capacity_mib": 256,
+    "statement_timeout_ms": 5000,
+    "lock_timeout_ms": 1000,
+    "idle_in_transaction_session_timeout_ms": 10000,
+    "budget_model": {
+      "private_backend_allowance_mib_per_slot": 8,
+      "modeled_query_slots": 8,
+      "memory_nodes_per_query": 4,
+      "query_participants": 1,
+      "foreground_maintenance_jobs": 1,
+      "temp_table_sessions": 2,
+      "other_and_cache_allowance_mib": 448,
+      "headroom_mib": 384,
+      "assumptions_are_not_hard_memory_caps": true
+    }
+  },
+  "app": {
+    "limit_mib": 512,
+    "replicas": 1,
+    "baseline_allowance_mib": 128,
+    "inflight_byte_budget_mib": 128,
+    "cache_budget_mib": 64,
+    "worker_and_other_allowance_mib": 64,
+    "headroom_mib": 128,
+    "pool_max_connections": {
+      "core": 6,
+      "search": 1,
+      "indexing": 1
+    },
+    "active_sql_limits": {
+      "core": 4,
+      "search": 1,
+      "indexing": 1
+    },
+    "pool_min_connections": 0,
+    "pool_acquire_timeout_ms": 500,
+    "statement_cache_entries_per_connection": 64,
+    "admission_concurrency": 16,
+    "cpu_task_concurrency": 2,
+    "waiter_limit": 64,
+    "job_prefetch_limit": 16,
+    "inspection_page_limit": 50,
+    "inspection_response_limit_kib": 256
+  },
+  "connection_plan": {
+    "external_ordinary_slots": 3,
+    "nonapp_memory_intensive_sql_slots": 2
+  }
+}

@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:runbrace:schema:observation-data:1",
+  "title": "Runbrace draft observation data v1",
+  "description": "One source claim about one named condition on one exact scoped entity; remediation policy remains external.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "kind",
+    "observed_at",
+    "entity",
+    "signal",
+    "coverage"
+  ],
+  "properties": {
+    "kind": {
+      "enum": [
+        "event",
+        "snapshot"
+      ]
+    },
+    "observed_at": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]{1,6})?Z$"
+    },
+    "entity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "native_id"
+      ],
+      "properties": {
+        "kind": {
+          "$ref": "urn:runbrace:schema:identity:1#/$defs/kind"
+        },
+        "native_id": {
+          "$ref": "urn:runbrace:schema:identity:1#/$defs/opaque_id"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "incarnation": {
+          "$ref": "urn:runbrace:schema:identity:1#/$defs/opaque_id"
+        },
+        "parents": {
+          "$ref": "urn:runbrace:schema:identity:1#/$defs/parents"
+        }
+      }
+    },
+    "signal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "state",
+        "severity",
+        "message"
+      ],
+      "properties": {
+        "name": {
+          "$ref": "urn:runbrace:schema:condition:1#/properties/condition/properties/name"
+        },
+        "state": {
+          "enum": [
+            "failing",
+            "healthy",
+            "unknown",
+            "informational"
+          ]
+        },
+        "severity": {
+          "enum": [
+            "info",
+            "warning",
+            "error",
+            "critical",
+            "unknown"
+          ]
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        },
+        "native_state": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "native_code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        }
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scope",
+        "complete"
+      ],
+      "properties": {
+        "scope": {
+          "const": "condition"
+        },
+        "complete": {
+          "type": "boolean"
+        }
+      }
+    },
+    "attributes": {
+      "type": "object",
+      "maxProperties": 23,
+      "propertyNames": {
+        "maxLength": 64,
+        "pattern": "^[a-z][a-z0-9_]*(\\.[a-z][a-z0-9_]*)+$",
+        "not": {
+          "pattern": "^runbrace\\."
+        }
+      },
+      "additionalProperties": {
+        "type": "string",
+        "maxLength": 1024
+      }
+    },
+    "correlation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "runbrace_request_id"
+      ],
+      "properties": {
+        "runbrace_request_id": {
+          "$ref": "urn:runbrace:schema:identity:1#/$defs/owned_id"
+        }
+      }
+    }
+  }
+}

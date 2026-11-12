@@ -1,0 +1,34 @@
+{
+  "outcome": "emit",
+  "conditions": [
+    {
+      "item_key": "observation/reported_condition",
+      "identity": {
+        "mode": "reliable",
+        "policy_version": "generic.observation_identity_v1",
+        "scope": "generic.observation",
+        "key": "sample-000184",
+        "condition_slot": "reported_condition"
+      },
+      "entity": {
+        "kind": "job",
+        "id": "example-job-42"
+      },
+      "condition": {
+        "name": "processing.output_validation",
+        "state": "failing",
+        "severity": "error",
+        "message": "The output did not pass the configured validation.",
+        "native_state": "validation_failed",
+        "native_code": "OUTPUT_INVALID"
+      },
+      "observation_kind": "snapshot",
+      "observation_time_basis": "source_reported",
+      "observed_at": "2026-11-09T14:00:00Z",
+      "source_event_id": "sample-000184",
+      "attributes": {
+        "example.validation_profile": "standard"
+      }
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "event_id": "019a6670-0000-7000-8000-000000000220",
+  "source": {
+    "instance_id": "019a6670-0000-7000-8000-000000000201",
+    "generation_id": "019a6670-0000-7000-8000-000000000202",
+    "service": "dagu"
+  },
+  "source_event_id": "example-native-notification-1",
+  "entity": {
+    "kind": "dag_run",
+    "id": "42",
+    "parents": [
+      {
+        "kind": "dag",
+        "id": "daily-import"
+      }
+    ]
+  },
+  "condition": {
+    "name": "workflow.run_failed",
+    "state": "failing",
+    "severity": "error",
+    "message": "Synthetic run failure reported by the source.",
+    "native_state": "failed"
+  },
+  "observed_at": "2026-11-09T14:00:00Z",
+  "received_at": "2026-11-09T14:00:01Z"
+}

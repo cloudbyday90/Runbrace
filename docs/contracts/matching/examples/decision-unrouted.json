@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "matching_profile": "exact_sets_v1",
+  "rule_set_id": "019a6670-0000-7000-8000-000000000600",
+  "routing_revision": "2026-11-09.1",
+  "rule_set_sha256": "105ed692cbdea92b42d3e76b618839f783c53f713959f753dc2cfa976c46b456",
+  "outcome": "unrouted",
+  "reason_code": "matching.no_rule_match",
+  "matched_rule_ids": [],
+  "destinations": []
+}

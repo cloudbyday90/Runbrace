@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:runbrace:schema:matching-decision:1",
+  "title": "Runbrace draft complete matching journal details v1",
+  "description": "Trusted event journal details; an error cannot be represented as successful no-match. Subject/reference/completeness/sortedness checks remain application obligations.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "matching_profile",
+    "rule_set_id",
+    "routing_revision",
+    "rule_set_sha256",
+    "outcome",
+    "reason_code",
+    "matched_rule_ids",
+    "destinations"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "matching_profile": {
+      "const": "exact_sets_v1"
+    },
+    "rule_set_id": {
+      "$ref": "urn:runbrace:schema:identity:1#/$defs/owned_id"
+    },
+    "routing_revision": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[a-z0-9][a-z0-9_.-]*$",
+      "not": {
+        "pattern": "[\\u0000-\\u001f\\u007f]"
+      }
+    },
+    "rule_set_sha256": {
+      "type": "string",
+      "minLength": 64,
+      "maxLength": 64,
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "outcome": {
+      "enum": [
+        "matched",
+        "unrouted"
+      ]
+    },
+    "reason_code": {
+      "enum": [
+        "matching.rules_matched",
+        "matching.no_rule_match"
+      ]
+    },
+    "matched_rule_ids": {
+      "type": "array",
+      "maxItems": 64,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "urn:runbrace:schema:identity:1#/$defs/owned_id"
+      }
+    },
+    "destinations": {
+      "type": "array",
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "destination_id",
+          "matched_rule_ids"
+        ],
+        "properties": {
+          "destination_id": {
+            "$ref": "urn:runbrace:schema:identity:1#/$defs/owned_id"
+          },
+          "matched_rule_ids": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 64,
+            "uniqueItems": true,
+            "items": {
+              "$ref": "urn:runbrace:schema:identity:1#/$defs/owned_id"
+            }
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "const": "matched"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "reason_code": {
+            "const": "matching.rules_matched"
+          },
+          "matched_rule_ids": {
+            "minItems": 1
+          },
+          "destinations": {
+            "minItems": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "const": "unrouted"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "reason_code": {
+            "const": "matching.no_rule_match"
+          },
+          "matched_rule_ids": {
+            "maxItems": 0
+          },
+          "destinations": {
+            "maxItems": 0
+          }
+        }
+      }
+    }
+  ]
+}

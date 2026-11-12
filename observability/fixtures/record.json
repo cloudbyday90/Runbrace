@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "timestamp": "2026-11-12T00:00:00Z",
+  "resource": {"service.name": "runbrace-compatibility", "service.version": "offline-prototype-v1", "deployment.environment.name": "offline"},
+  "operation": "handoff",
+  "outcome": "unknown",
+  "reason": "timeout",
+  "request_id": "019a7410-0000-7000-8000-000000000001",
+  "event_id": "019a7410-0000-7000-8000-000000000002",
+  "job_id": "fixture-job-1",
+  "attempt_id": "fixture-attempt-1",
+  "legacy_id": "9223372036854775807",
+  "duration_ms": 125.5,
+  "trace_id": "11111111111111111111111111111111",
+  "span_id": "2222222222222222"
+}

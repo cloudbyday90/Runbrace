@@ -1,0 +1,248 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:runbrace:schema:matching-rule-set:1",
+  "title": "Runbrace draft exact/set/presence matching rule set v1",
+  "description": "Reviewed config artifact; schema shape does not establish authorized references, semantic typing, contradiction checks, activation, or runtime matching.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "matching_profile",
+    "rule_set_id",
+    "routing_revision",
+    "rules"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "matching_profile": {
+      "const": "exact_sets_v1"
+    },
+    "rule_set_id": {
+      "$ref": "urn:runbrace:schema:identity:1#/$defs/owned_id"
+    },
+    "routing_revision": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[a-z0-9][a-z0-9_.-]*$",
+      "not": {
+        "pattern": "[\\u0000-\\u001f\\u007f]"
+      }
+    },
+    "rules": {
+      "type": "array",
+      "maxItems": 64,
+      "items": {
+        "$ref": "#/$defs/rule"
+      }
+    }
+  },
+  "$defs": {
+    "rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rule_id",
+        "name",
+        "enabled",
+        "source_instance_ids",
+        "condition_names",
+        "states",
+        "destination_ids"
+      ],
+      "properties": {
+        "rule_id": {
+          "$ref": "urn:runbrace:schema:identity:1#/$defs/owned_id"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "not": {
+            "pattern": "[\\u0000-\\u001f\\u007f]"
+          }
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "source_instance_ids": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 16,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "urn:runbrace:schema:identity:1#/$defs/owned_id"
+          }
+        },
+        "condition_names": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 32,
+          "uniqueItems": true,
+          "items": {
+            "allOf": [
+              {
+                "$ref": "urn:runbrace:schema:condition:1#/properties/condition/properties/name"
+              },
+              {
+                "not": {
+                  "pattern": "[\\u0000-\\u001f\\u007f]"
+                }
+              }
+            ]
+          }
+        },
+        "states": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 4,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "urn:runbrace:schema:condition:1#/properties/condition/properties/state"
+          }
+        },
+        "destination_ids": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "urn:runbrace:schema:identity:1#/$defs/owned_id"
+          }
+        },
+        "when": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "any"
+          ],
+          "properties": {
+            "any": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 8,
+              "uniqueItems": true,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "all"
+                ],
+                "properties": {
+                  "all": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 8,
+                    "uniqueItems": true,
+                    "items": {
+                      "$ref": "#/$defs/predicate"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "predicate": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "field",
+            "op",
+            "value"
+          ],
+          "properties": {
+            "field": {
+              "enum": [
+                "source.generation_id",
+                "source.service",
+                "entity.kind",
+                "condition.severity",
+                "condition.native_state",
+                "condition.native_code"
+              ]
+            },
+            "op": {
+              "const": "eq"
+            },
+            "value": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128,
+              "not": {
+                "pattern": "[\\u0000-\\u001f\\u007f]"
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "field",
+            "op",
+            "values"
+          ],
+          "properties": {
+            "field": {
+              "enum": [
+                "source.generation_id",
+                "source.service",
+                "entity.kind",
+                "condition.severity",
+                "condition.native_state",
+                "condition.native_code"
+              ]
+            },
+            "op": {
+              "const": "in"
+            },
+            "values": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 32,
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128,
+                "not": {
+                  "pattern": "[\\u0000-\\u001f\\u007f]"
+                }
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "field",
+            "op",
+            "value"
+          ],
+          "properties": {
+            "field": {
+              "enum": [
+                "condition.native_state",
+                "condition.native_code"
+              ]
+            },
+            "op": {
+              "const": "exists"
+            },
+            "value": {
+              "type": "boolean"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

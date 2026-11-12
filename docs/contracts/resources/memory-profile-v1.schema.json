@@ -1,0 +1,433 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:runbrace:schema:memory-sizing-profile:1",
+  "title": "Runbrace draft illustrative core memory sizing worksheet v1",
+  "description": "Unmeasured review artifact; not PostgreSQL/Docker/application configuration. Cross-field arithmetic and runtime behavior require separate checks.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "profile_key",
+    "status",
+    "scope",
+    "core_total_limit_mib",
+    "host_reserve_mib",
+    "embedding",
+    "swap_policy",
+    "vector_search_mode",
+    "postgresql",
+    "app",
+    "connection_plan"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "profile_key": {
+      "type": "string",
+      "pattern": "^[a-z0-9_]+$",
+      "minLength": 1,
+      "maxLength": 64,
+      "not": {
+        "pattern": "[\\u0000-\\u001f\\u007f]"
+      }
+    },
+    "status": {
+      "const": "illustrative_unmeasured"
+    },
+    "scope": {
+      "const": "rust_app_and_postgresql_only"
+    },
+    "core_total_limit_mib": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1048576
+    },
+    "host_reserve_mib": {
+      "type": "null"
+    },
+    "embedding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "runtime",
+        "limit_mib",
+        "excluded_from_core_total"
+      ],
+      "properties": {
+        "runtime": {
+          "const": "unselected"
+        },
+        "limit_mib": {
+          "type": "null"
+        },
+        "excluded_from_core_total": {
+          "const": true
+        }
+      }
+    },
+    "swap_policy": {
+      "const": "no_additional_container_swap"
+    },
+    "vector_search_mode": {
+      "const": "exact_baseline"
+    },
+    "postgresql": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "limit_mib",
+        "shared_buffers_mib",
+        "wal_buffers_mib",
+        "work_mem_mib",
+        "hash_mem_multiplier",
+        "maintenance_work_mem_mib",
+        "autovacuum_work_mem_mib",
+        "autovacuum_max_workers",
+        "max_connections",
+        "superuser_reserved_connections",
+        "other_reserved_connections",
+        "max_parallel_workers_per_gather",
+        "max_parallel_maintenance_workers",
+        "temp_buffers_mib",
+        "temp_file_limit_mib",
+        "effective_cache_size_mib",
+        "shm_capacity_mib",
+        "statement_timeout_ms",
+        "lock_timeout_ms",
+        "idle_in_transaction_session_timeout_ms",
+        "budget_model"
+      ],
+      "properties": {
+        "limit_mib": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1048576
+        },
+        "shared_buffers_mib": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1048576
+        },
+        "wal_buffers_mib": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1048576
+        },
+        "work_mem_mib": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1048576
+        },
+        "hash_mem_multiplier": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 8
+        },
+        "maintenance_work_mem_mib": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1048576
+        },
+        "autovacuum_work_mem_mib": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1048576
+        },
+        "autovacuum_max_workers": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1048576
+        },
+        "max_connections": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1048576
+        },
+        "superuser_reserved_connections": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1048576
+        },
+        "other_reserved_connections": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1048576
+        },
+        "max_parallel_workers_per_gather": {
+          "const": 0
+        },
+        "max_parallel_maintenance_workers": {
+          "const": 0
+        },
+        "temp_buffers_mib": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1048576
+        },
+        "temp_file_limit_mib": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1048576
+        },
+        "effective_cache_size_mib": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1048576
+        },
+        "shm_capacity_mib": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1048576
+        },
+        "statement_timeout_ms": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1048576
+        },
+        "lock_timeout_ms": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1048576
+        },
+        "idle_in_transaction_session_timeout_ms": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1048576
+        },
+        "budget_model": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "private_backend_allowance_mib_per_slot",
+            "modeled_query_slots",
+            "memory_nodes_per_query",
+            "query_participants",
+            "foreground_maintenance_jobs",
+            "temp_table_sessions",
+            "other_and_cache_allowance_mib",
+            "headroom_mib",
+            "assumptions_are_not_hard_memory_caps"
+          ],
+          "properties": {
+            "private_backend_allowance_mib_per_slot": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1048576
+            },
+            "modeled_query_slots": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1048576
+            },
+            "memory_nodes_per_query": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1048576
+            },
+            "query_participants": {
+              "const": 1
+            },
+            "foreground_maintenance_jobs": {
+              "const": 1
+            },
+            "temp_table_sessions": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1048576
+            },
+            "other_and_cache_allowance_mib": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1048576
+            },
+            "headroom_mib": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1048576
+            },
+            "assumptions_are_not_hard_memory_caps": {
+              "const": true
+            }
+          }
+        }
+      }
+    },
+    "app": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "limit_mib",
+        "replicas",
+        "baseline_allowance_mib",
+        "inflight_byte_budget_mib",
+        "cache_budget_mib",
+        "worker_and_other_allowance_mib",
+        "headroom_mib",
+        "pool_max_connections",
+        "active_sql_limits",
+        "pool_min_connections",
+        "pool_acquire_timeout_ms",
+        "statement_cache_entries_per_connection",
+        "admission_concurrency",
+        "cpu_task_concurrency",
+        "waiter_limit",
+        "job_prefetch_limit",
+        "inspection_page_limit",
+        "inspection_response_limit_kib"
+      ],
+      "properties": {
+        "limit_mib": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1048576
+        },
+        "replicas": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1048576
+        },
+        "baseline_allowance_mib": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1048576
+        },
+        "inflight_byte_budget_mib": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1048576
+        },
+        "cache_budget_mib": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1048576
+        },
+        "worker_and_other_allowance_mib": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1048576
+        },
+        "headroom_mib": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1048576
+        },
+        "pool_max_connections": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "core",
+            "search",
+            "indexing"
+          ],
+          "properties": {
+            "core": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1048576
+            },
+            "search": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1048576
+            },
+            "indexing": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1048576
+            }
+          }
+        },
+        "active_sql_limits": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "core",
+            "search",
+            "indexing"
+          ],
+          "properties": {
+            "core": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1048576
+            },
+            "search": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1048576
+            },
+            "indexing": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1048576
+            }
+          }
+        },
+        "pool_min_connections": {
+          "const": 0
+        },
+        "pool_acquire_timeout_ms": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1048576
+        },
+        "statement_cache_entries_per_connection": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1048576
+        },
+        "admission_concurrency": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1048576
+        },
+        "cpu_task_concurrency": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1048576
+        },
+        "waiter_limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1048576
+        },
+        "job_prefetch_limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1048576
+        },
+        "inspection_page_limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1048576
+        },
+        "inspection_response_limit_kib": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1048576
+        }
+      }
+    },
+    "connection_plan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "external_ordinary_slots",
+        "nonapp_memory_intensive_sql_slots"
+      ],
+      "properties": {
+        "external_ordinary_slots": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1048576
+        },
+        "nonapp_memory_intensive_sql_slots": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1048576
+        }
+      }
+    }
+  }
+}

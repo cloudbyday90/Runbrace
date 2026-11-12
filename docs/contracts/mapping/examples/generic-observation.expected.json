@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "event_id": "019a6670-0000-7000-8000-000000000310",
+  "source": {
+    "instance_id": "019a6670-0000-7000-8000-000000000001",
+    "generation_id": "019a6670-0000-7000-8000-000000000002",
+    "service": "custom"
+  },
+  "source_event_id": "sample-000184",
+  "entity": {
+    "kind": "job",
+    "id": "example-job-42"
+  },
+  "condition": {
+    "name": "processing.output_validation",
+    "state": "failing",
+    "severity": "error",
+    "message": "The output did not pass the configured validation.",
+    "native_state": "validation_failed",
+    "native_code": "OUTPUT_INVALID"
+  },
+  "observed_at": "2026-11-09T14:00:00Z",
+  "received_at": "2026-11-09T14:00:01Z",
+  "attributes": {
+    "example.validation_profile": "standard",
+    "runbrace.observation_kind": "snapshot",
+    "runbrace.identity_kind": "reliable",
+    "runbrace.time_basis": "source_reported",
+    "runbrace.mapping_profile": "generic.observation",
+    "runbrace.mapping_version": "2026-11-09.1",
+    "runbrace.source_coverage_scope": "condition",
+    "runbrace.source_coverage_complete": "true",
+    "runbrace.source_event_time": "2026-11-09T14:00:00Z"
+  }
+}

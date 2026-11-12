@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:runbrace:schema:intake-receipt:1",
+  "title": "Runbrace draft inbound intake receipt v1",
+  "description": "Durable receipt/current processing state; not outbound consumer acknowledgment.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "receipt_id",
+    "status",
+    "duplicate"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "receipt_id": {
+      "$ref": "urn:runbrace:schema:identity:1#/$defs/owned_id"
+    },
+    "status": {
+      "enum": [
+        "received",
+        "processing",
+        "retry_wait",
+        "processed",
+        "ignored",
+        "quarantined"
+      ]
+    },
+    "duplicate": {
+      "type": "boolean"
+    }
+  }
+}

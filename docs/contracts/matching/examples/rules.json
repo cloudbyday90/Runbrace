@@ -1,0 +1,271 @@
+{
+  "schema_version": 1,
+  "matching_profile": "exact_sets_v1",
+  "rule_set_id": "019a6670-0000-7000-8000-000000000600",
+  "routing_revision": "2026-11-09.1",
+  "rules": [
+    {
+      "rule_id": "019a6670-0000-7000-8000-000000000601",
+      "name": "SAB failure to primary receiver",
+      "enabled": true,
+      "source_instance_ids": [
+        "019a6670-0000-7000-8000-000000000101"
+      ],
+      "condition_names": [
+        "download.failed"
+      ],
+      "states": [
+        "failing"
+      ],
+      "destination_ids": [
+        "019a6670-0000-7000-8000-000000000501"
+      ]
+    },
+    {
+      "rule_id": "019a6670-0000-7000-8000-000000000602",
+      "name": "SAB error or critical fan-out",
+      "enabled": true,
+      "source_instance_ids": [
+        "019a6670-0000-7000-8000-000000000101"
+      ],
+      "condition_names": [
+        "download.failed"
+      ],
+      "states": [
+        "failing"
+      ],
+      "destination_ids": [
+        "019a6670-0000-7000-8000-000000000501",
+        "019a6670-0000-7000-8000-000000000502"
+      ],
+      "when": {
+        "any": [
+          {
+            "all": [
+              {
+                "field": "condition.severity",
+                "op": "in",
+                "values": [
+                  "error",
+                  "critical"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "rule_id": "019a6670-0000-7000-8000-000000000603",
+      "name": "Explicit unfamiliar SAB status",
+      "enabled": true,
+      "source_instance_ids": [
+        "019a6670-0000-7000-8000-000000000101"
+      ],
+      "condition_names": [
+        "download.status"
+      ],
+      "states": [
+        "unknown"
+      ],
+      "destination_ids": [
+        "019a6670-0000-7000-8000-000000000503"
+      ]
+    },
+    {
+      "rule_id": "019a6670-0000-7000-8000-000000000604",
+      "name": "Generic reported validation code",
+      "enabled": true,
+      "source_instance_ids": [
+        "019a6670-0000-7000-8000-000000000001"
+      ],
+      "condition_names": [
+        "processing.output_validation"
+      ],
+      "states": [
+        "failing"
+      ],
+      "destination_ids": [
+        "019a6670-0000-7000-8000-000000000502"
+      ],
+      "when": {
+        "any": [
+          {
+            "all": [
+              {
+                "field": "condition.native_code",
+                "op": "eq",
+                "value": "OUTPUT_INVALID"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "rule_id": "019a6670-0000-7000-8000-000000000605",
+      "name": "Generic healthy report without native code",
+      "enabled": true,
+      "source_instance_ids": [
+        "019a6670-0000-7000-8000-000000000001"
+      ],
+      "condition_names": [
+        "processing.output_validation"
+      ],
+      "states": [
+        "healthy"
+      ],
+      "destination_ids": [
+        "019a6670-0000-7000-8000-000000000503"
+      ],
+      "when": {
+        "any": [
+          {
+            "all": [
+              {
+                "field": "condition.native_code",
+                "op": "exists",
+                "value": false
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "rule_id": "019a6670-0000-7000-8000-000000000606",
+      "name": "Critical coded report or explicit native code",
+      "enabled": true,
+      "source_instance_ids": [
+        "019a6670-0000-7000-8000-000000000101"
+      ],
+      "condition_names": [
+        "download.failed"
+      ],
+      "states": [
+        "failing"
+      ],
+      "destination_ids": [
+        "019a6670-0000-7000-8000-000000000504"
+      ],
+      "when": {
+        "any": [
+          {
+            "all": [
+              {
+                "field": "condition.severity",
+                "op": "eq",
+                "value": "critical"
+              },
+              {
+                "field": "condition.native_code",
+                "op": "exists",
+                "value": true
+              }
+            ]
+          },
+          {
+            "all": [
+              {
+                "field": "condition.native_code",
+                "op": "in",
+                "values": [
+                  "DISK_FULL",
+                  "e'",
+                  "42"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "rule_id": "019a6670-0000-7000-8000-000000000607",
+      "name": "Disabled recording receiver",
+      "enabled": false,
+      "source_instance_ids": [
+        "019a6670-0000-7000-8000-000000000101"
+      ],
+      "condition_names": [
+        "download.failed"
+      ],
+      "states": [
+        "failing"
+      ],
+      "destination_ids": [
+        "019a6670-0000-7000-8000-000000000505"
+      ]
+    },
+    {
+      "rule_id": "019a6670-0000-7000-8000-000000000608",
+      "name": "Generation-specific completed download",
+      "enabled": true,
+      "source_instance_ids": [
+        "019a6670-0000-7000-8000-000000000101"
+      ],
+      "condition_names": [
+        "download.completed"
+      ],
+      "states": [
+        "informational"
+      ],
+      "destination_ids": [
+        "019a6670-0000-7000-8000-000000000506"
+      ],
+      "when": {
+        "any": [
+          {
+            "all": [
+              {
+                "field": "source.generation_id",
+                "op": "eq",
+                "value": "019a6670-0000-7000-8000-000000000102"
+              },
+              {
+                "field": "entity.kind",
+                "op": "eq",
+                "value": "download"
+              },
+              {
+                "field": "source.service",
+                "op": "eq",
+                "value": "sabnzbd"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "rule_id": "019a6670-0000-7000-8000-000000000609",
+      "name": "Exact native Failed spelling",
+      "enabled": true,
+      "source_instance_ids": [
+        "019a6670-0000-7000-8000-000000000101"
+      ],
+      "condition_names": [
+        "download.failed"
+      ],
+      "states": [
+        "failing"
+      ],
+      "destination_ids": [
+        "019a6670-0000-7000-8000-000000000501"
+      ],
+      "when": {
+        "any": [
+          {
+            "all": [
+              {
+                "field": "condition.native_state",
+                "op": "eq",
+                "value": "Failed"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

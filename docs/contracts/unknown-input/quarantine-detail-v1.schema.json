@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:runbrace:schema:quarantine-detail:1",
+  "title": "Runbrace draft structured quarantine journal details v1",
+  "description": "Trusted bounded diagnostic output; no native values/body or implicit reprocessing permission.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "reason_code",
+    "stage",
+    "input_evidence_kind",
+    "affected_item_count",
+    "automatic_retry",
+    "recovery_requirement"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "reason_code": {
+      "enum": [
+        "input.unsupported_event_type",
+        "input.unsupported_native_schema",
+        "input.unsupported_native_variant",
+        "mapping.required_missing",
+        "mapping.type_mismatch",
+        "mapping.invalid_value",
+        "mapping.missing_identity_scope",
+        "mapping.bundle_unavailable",
+        "mapping.retry_exhausted",
+        "input.identity_conflict",
+        "matching.configuration_unavailable",
+        "matching.invalid_input",
+        "matching.evaluation_failed",
+        "matching.limit_exceeded",
+        "resources.capacity_exhausted",
+        "resources.profile_invalid"
+      ]
+    },
+    "stage": {
+      "enum": [
+        "native_admission",
+        "retained_validation",
+        "mapping",
+        "processing",
+        "matching"
+      ]
+    },
+    "input_evidence_kind": {
+      "enum": [
+        "replayable",
+        "diagnostic_only"
+      ]
+    },
+    "affected_item_count": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 100
+    },
+    "automatic_retry": {
+      "const": false
+    },
+    "recovery_requirement": {
+      "enum": [
+        "compatible_mapping_review",
+        "source_evidence_required",
+        "artifact_recovery",
+        "review_only"
+      ]
+    },
+    "field_pointer": {
+      "type": "string",
+      "format": "json-pointer",
+      "maxLength": 256,
+      "not": {
+        "pattern": "[\\u0000-\\u001f\\u007f]"
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "input_evidence_kind": {
+            "const": "diagnostic_only"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "recovery_requirement": {
+            "enum": [
+              "source_evidence_required",
+              "review_only"
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "diagnostic_projection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "classification",
+        "source_body_retained"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": 1
+        },
+        "classification": {
+          "const": "unsupported_native_input"
+        },
+        "source_body_retained": {
+          "const": false
+        }
+      }
+    }
+  }
+}

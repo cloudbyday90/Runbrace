@@ -1,0 +1,94 @@
+{
+  "view_version": 1,
+  "receipt": {
+    "id": "019a6670-0000-7000-8000-000000000010",
+    "status": "processed",
+    "received_at": "2026-11-09T14:00:01Z",
+    "event_count": 1,
+    "delivery_count": 2
+  },
+  "event": {
+    "schema_version": 1,
+    "event_id": "019a6670-0000-7000-8000-000000000020",
+    "source": {
+      "instance_id": "019a6670-0000-7000-8000-000000000001",
+      "generation_id": "019a6670-0000-7000-8000-000000000002",
+      "service": "sabnzbd"
+    },
+    "source_event_id": "example-history-184",
+    "entity": {
+      "kind": "download",
+      "id": "example-job-42"
+    },
+    "condition": {
+      "name": "download.unpack_failed",
+      "state": "failing",
+      "severity": "error",
+      "message": "Unpacking failed.",
+      "native_state": "Failed"
+    },
+    "observed_at": "2026-11-09T14:00:00Z",
+    "received_at": "2026-11-09T14:00:01Z"
+  },
+  "deliveries": [
+    {
+      "id": "019a6670-0000-7000-8000-000000000040",
+      "event_id": "019a6670-0000-7000-8000-000000000020",
+      "destination": {
+        "id": "019a6670-0000-7000-8000-000000000030",
+        "name": "example_n8n_workflow"
+      },
+      "status": "accepted",
+      "attempt_count": 1,
+      "accepted_at": "2026-11-09T14:00:02Z",
+      "next_attempt_at": null,
+      "attempts": [
+        {
+          "id": "019a6670-0000-7000-8000-000000000050",
+          "attempt_number": 1,
+          "started_at": "2026-11-09T14:00:01.500000Z",
+          "finished_at": "2026-11-09T14:00:02Z",
+          "outcome": "accepted",
+          "response_status": 202,
+          "error_code": null,
+          "remote_reference": "example-consumer-receipt-184",
+          "acknowledgment_summary": {
+            "identities_match": true,
+            "duplicate": false
+          }
+        }
+      ],
+      "transport_profile": "http_json_v1",
+      "acknowledgment_profile": "generic_receipt_v1",
+      "receiver_mode": "unverified",
+      "acceptance_basis": "explicit_receipt"
+    },
+    {
+      "id": "019a6670-0000-7000-8000-000000000041",
+      "event_id": "019a6670-0000-7000-8000-000000000020",
+      "destination": {
+        "id": "019a6670-0000-7000-8000-000000000031",
+        "name": "example_dagu_workflow"
+      },
+      "status": "unknown",
+      "attempt_count": 1,
+      "accepted_at": null,
+      "next_attempt_at": null,
+      "attempts": [
+        {
+          "id": "019a6670-0000-7000-8000-000000000051",
+          "attempt_number": 1,
+          "started_at": "2026-11-09T14:00:02Z",
+          "finished_at": "2026-11-09T14:00:12Z",
+          "outcome": "unknown",
+          "response_status": null,
+          "error_code": "response_timeout"
+        }
+      ],
+      "transport_profile": "dagu_webhook_v1",
+      "acknowledgment_profile": "dagu_run_v1",
+      "receiver_mode": "unverified",
+      "acceptance_basis": null
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:runbrace:compatibility:fixture-status:1",
+  "type": "object", "additionalProperties": false,
+  "required": ["version", "request_id", "state", "reason", "attempt_id", "result"],
+  "properties": {
+    "version": {"type": "integer", "const": 1},
+    "request_id": {"type": "string", "format": "uuid"},
+    "state": {"enum": ["accepted", "running", "succeeded", "uncertain"]},
+    "reason": {"enum": ["awaiting_explicit_run", "executing", "fixture_verified", "spawn_failed", "unverified_output", "interrupted", "timeout", "ownership_lost", "ledger_unavailable", "output_limit", "nonzero_exit"]},
+    "attempt_id": {"type": ["string", "null"], "format": "uuid"},
+    "result": {"oneOf": [{"type": "null"}, {"$ref": "result-v1.schema.json"}]}
+  }
+}

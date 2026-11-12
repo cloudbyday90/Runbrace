@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "event_id": "019a6670-0000-7000-8000-000000000020",
+  "source": {
+    "instance_id": "019a6670-0000-7000-8000-000000000001",
+    "generation_id": "019a6670-0000-7000-8000-000000000002",
+    "service": "sabnzbd"
+  },
+  "source_event_id": "example-history-184",
+  "entity": {
+    "kind": "download",
+    "id": "example-job-42"
+  },
+  "condition": {
+    "name": "download.unpack_failed",
+    "state": "failing",
+    "severity": "error",
+    "message": "Unpacking failed.",
+    "native_state": "Failed"
+  },
+  "observed_at": "2026-11-09T14:00:00Z",
+  "received_at": "2026-11-09T14:00:01Z"
+}

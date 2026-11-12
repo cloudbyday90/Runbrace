@@ -1,0 +1,259 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:runbrace:schema:status-table-profile:1",
+  "title": "Runbrace draft status-table snapshot review manifest v1",
+  "description": "Review artifact for a bounded simple family; no executable mapping interpreter or runtime adapter is implemented.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "family",
+    "profile_id",
+    "mapping_version",
+    "service",
+    "input_profile",
+    "projection_version",
+    "selectors",
+    "retained_item_fields",
+    "entity_kind",
+    "condition_slot",
+    "observation_kind",
+    "time_basis",
+    "identity_policy",
+    "rules",
+    "unknown",
+    "message_policy",
+    "invalid_item",
+    "empty_collection",
+    "max_conditions"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "family": {
+      "const": "status_table_snapshot_v1"
+    },
+    "profile_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[a-z0-9][a-z0-9_.-]*$",
+      "not": {
+        "pattern": "[\\u0000-\\u001f\\u007f]"
+      }
+    },
+    "mapping_version": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[a-z0-9][a-z0-9_.-]*$",
+      "not": {
+        "pattern": "[\\u0000-\\u001f\\u007f]"
+      }
+    },
+    "service": {
+      "$ref": "urn:runbrace:schema:identity:1#/$defs/kind"
+    },
+    "input_profile": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[a-z0-9][a-z0-9_.-]*$",
+      "not": {
+        "pattern": "[\\u0000-\\u001f\\u007f]"
+      }
+    },
+    "projection_version": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[a-z0-9][a-z0-9_.-]*$",
+      "not": {
+        "pattern": "[\\u0000-\\u001f\\u007f]"
+      }
+    },
+    "selectors": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "items",
+        "entity_id",
+        "native_state"
+      ],
+      "properties": {
+        "items": {
+          "type": "string",
+          "format": "json-pointer",
+          "minLength": 1,
+          "maxLength": 256,
+          "not": {
+            "pattern": "[\\u0000-\\u001f\\u007f]"
+          }
+        },
+        "entity_id": {
+          "type": "string",
+          "format": "json-pointer",
+          "minLength": 1,
+          "maxLength": 256,
+          "not": {
+            "pattern": "[\\u0000-\\u001f\\u007f]"
+          }
+        },
+        "native_state": {
+          "type": "string",
+          "format": "json-pointer",
+          "minLength": 1,
+          "maxLength": 256,
+          "not": {
+            "pattern": "[\\u0000-\\u001f\\u007f]"
+          }
+        }
+      }
+    },
+    "retained_item_fields": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 16,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "format": "json-pointer",
+        "minLength": 1,
+        "maxLength": 256,
+        "not": {
+          "pattern": "[\\u0000-\\u001f\\u007f]"
+        }
+      }
+    },
+    "entity_kind": {
+      "$ref": "urn:runbrace:schema:identity:1#/$defs/kind"
+    },
+    "condition_slot": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[a-z0-9][a-z0-9_.-]*$",
+      "not": {
+        "pattern": "[\\u0000-\\u001f\\u007f]"
+      }
+    },
+    "observation_kind": {
+      "const": "snapshot"
+    },
+    "time_basis": {
+      "const": "collector_observed"
+    },
+    "identity_policy": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[a-z0-9][a-z0-9_.-]*$",
+      "not": {
+        "pattern": "[\\u0000-\\u001f\\u007f]"
+      }
+    },
+    "rules": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 32,
+      "items": {
+        "$ref": "#/$defs/rule"
+      }
+    },
+    "unknown": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/condition"
+        },
+        {
+          "properties": {
+            "state": {
+              "const": "unknown"
+            },
+            "severity": {
+              "const": "unknown"
+            }
+          }
+        }
+      ]
+    },
+    "message_policy": {
+      "const": "fixed"
+    },
+    "invalid_item": {
+      "const": "quarantine_receipt"
+    },
+    "empty_collection": {
+      "const": "ignore"
+    },
+    "max_conditions": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 100
+    }
+  },
+  "$defs": {
+    "condition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "state",
+        "severity",
+        "message"
+      ],
+      "properties": {
+        "name": {
+          "$ref": "urn:runbrace:schema:condition:1#/properties/condition/properties/name"
+        },
+        "state": {
+          "$ref": "urn:runbrace:schema:condition:1#/properties/condition/properties/state"
+        },
+        "severity": {
+          "$ref": "urn:runbrace:schema:condition:1#/properties/condition/properties/severity"
+        },
+        "message": {
+          "$ref": "urn:runbrace:schema:condition:1#/properties/condition/properties/message"
+        }
+      }
+    },
+    "rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rule_id",
+        "native_values",
+        "condition"
+      ],
+      "properties": {
+        "rule_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-z0-9][a-z0-9_.-]*$",
+          "not": {
+            "pattern": "[\\u0000-\\u001f\\u007f]"
+          }
+        },
+        "native_values": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 32,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "not": {
+              "pattern": "[\\u0000-\\u001f\\u007f]"
+            }
+          }
+        },
+        "condition": {
+          "$ref": "#/$defs/condition"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:runbrace:schema:http-receipt:1",
+  "title": "Runbrace draft generic HTTP acceptance receipt v1",
+  "description": "A receiver acceptance claim; structural validity is not atomic enqueue or remediation proof.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "event_id",
+    "delivery_id",
+    "receipt_id",
+    "status",
+    "duplicate"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "event_id": {
+      "$ref": "urn:runbrace:schema:identity:1#/$defs/owned_id"
+    },
+    "delivery_id": {
+      "$ref": "urn:runbrace:schema:identity:1#/$defs/owned_id"
+    },
+    "receipt_id": {
+      "$ref": "urn:runbrace:schema:identity:1#/$defs/opaque_id"
+    },
+    "status": {
+      "const": "accepted"
+    },
+    "duplicate": {
+      "type": "boolean"
+    }
+  }
+}

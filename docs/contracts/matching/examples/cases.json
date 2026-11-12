@@ -1,0 +1,1369 @@
+{
+  "description": "Authored matching-interface expectations for synthetic candidates. Valid shape does not establish native mapper support or trusted registration membership.",
+  "rule_set": "rules.json",
+  "cases": [
+    {
+      "case_id": "base-failure",
+      "candidate": {
+        "schema_version": 1,
+        "event_id": "019a6670-0000-7000-8000-000000000120",
+        "source": {
+          "instance_id": "019a6670-0000-7000-8000-000000000101",
+          "generation_id": "019a6670-0000-7000-8000-000000000102",
+          "service": "sabnzbd"
+        },
+        "entity": {
+          "kind": "download",
+          "id": "SABnzbd_nzo_example42"
+        },
+        "condition": {
+          "name": "download.failed",
+          "state": "failing",
+          "severity": "error",
+          "message": "SABnzbd reported a failed download.",
+          "native_state": "Failed"
+        },
+        "observed_at": "2026-11-09T14:00:00Z",
+        "received_at": "2026-11-09T14:00:01Z",
+        "attributes": {
+          "runbrace.observation_kind": "snapshot",
+          "runbrace.identity_kind": "unkeyed",
+          "runbrace.time_basis": "collector_observed",
+          "runbrace.mapping_profile": "sabnzbd.history_status",
+          "runbrace.mapping_version": "2026-11-09.1"
+        }
+      },
+      "expected": {
+        "outcome": "matched",
+        "matched_rule_ids": [
+          "019a6670-0000-7000-8000-000000000601",
+          "019a6670-0000-7000-8000-000000000602",
+          "019a6670-0000-7000-8000-000000000609"
+        ],
+        "destination_ids": [
+          "019a6670-0000-7000-8000-000000000501",
+          "019a6670-0000-7000-8000-000000000502"
+        ]
+      }
+    },
+    {
+      "case_id": "critical-with-code",
+      "candidate": {
+        "schema_version": 1,
+        "event_id": "019a6670-0000-7000-8000-000000000120",
+        "source": {
+          "instance_id": "019a6670-0000-7000-8000-000000000101",
+          "generation_id": "019a6670-0000-7000-8000-000000000102",
+          "service": "sabnzbd"
+        },
+        "entity": {
+          "kind": "download",
+          "id": "SABnzbd_nzo_example42"
+        },
+        "condition": {
+          "name": "download.failed",
+          "state": "failing",
+          "severity": "critical",
+          "message": "SABnzbd reported a failed download.",
+          "native_state": "Failed",
+          "native_code": "OTHER"
+        },
+        "observed_at": "2026-11-09T14:00:00Z",
+        "received_at": "2026-11-09T14:00:01Z",
+        "attributes": {
+          "runbrace.observation_kind": "snapshot",
+          "runbrace.identity_kind": "unkeyed",
+          "runbrace.time_basis": "collector_observed",
+          "runbrace.mapping_profile": "sabnzbd.history_status",
+          "runbrace.mapping_version": "2026-11-09.1"
+        }
+      },
+      "expected": {
+        "outcome": "matched",
+        "matched_rule_ids": [
+          "019a6670-0000-7000-8000-000000000601",
+          "019a6670-0000-7000-8000-000000000602",
+          "019a6670-0000-7000-8000-000000000606",
+          "019a6670-0000-7000-8000-000000000609"
+        ],
+        "destination_ids": [
+          "019a6670-0000-7000-8000-000000000501",
+          "019a6670-0000-7000-8000-000000000502",
+          "019a6670-0000-7000-8000-000000000504"
+        ]
+      }
+    },
+    {
+      "case_id": "critical-without-code",
+      "candidate": {
+        "schema_version": 1,
+        "event_id": "019a6670-0000-7000-8000-000000000120",
+        "source": {
+          "instance_id": "019a6670-0000-7000-8000-000000000101",
+          "generation_id": "019a6670-0000-7000-8000-000000000102",
+          "service": "sabnzbd"
+        },
+        "entity": {
+          "kind": "download",
+          "id": "SABnzbd_nzo_example42"
+        },
+        "condition": {
+          "name": "download.failed",
+          "state": "failing",
+          "severity": "critical",
+          "message": "SABnzbd reported a failed download.",
+          "native_state": "Failed"
+        },
+        "observed_at": "2026-11-09T14:00:00Z",
+        "received_at": "2026-11-09T14:00:01Z",
+        "attributes": {
+          "runbrace.observation_kind": "snapshot",
+          "runbrace.identity_kind": "unkeyed",
+          "runbrace.time_basis": "collector_observed",
+          "runbrace.mapping_profile": "sabnzbd.history_status",
+          "runbrace.mapping_version": "2026-11-09.1"
+        }
+      },
+      "expected": {
+        "outcome": "matched",
+        "matched_rule_ids": [
+          "019a6670-0000-7000-8000-000000000601",
+          "019a6670-0000-7000-8000-000000000602",
+          "019a6670-0000-7000-8000-000000000609"
+        ],
+        "destination_ids": [
+          "019a6670-0000-7000-8000-000000000501",
+          "019a6670-0000-7000-8000-000000000502"
+        ]
+      }
+    },
+    {
+      "case_id": "explicit-native-code",
+      "candidate": {
+        "schema_version": 1,
+        "event_id": "019a6670-0000-7000-8000-000000000120",
+        "source": {
+          "instance_id": "019a6670-0000-7000-8000-000000000101",
+          "generation_id": "019a6670-0000-7000-8000-000000000102",
+          "service": "sabnzbd"
+        },
+        "entity": {
+          "kind": "download",
+          "id": "SABnzbd_nzo_example42"
+        },
+        "condition": {
+          "name": "download.failed",
+          "state": "failing",
+          "severity": "error",
+          "message": "SABnzbd reported a failed download.",
+          "native_state": "Failed",
+          "native_code": "DISK_FULL"
+        },
+        "observed_at": "2026-11-09T14:00:00Z",
+        "received_at": "2026-11-09T14:00:01Z",
+        "attributes": {
+          "runbrace.observation_kind": "snapshot",
+          "runbrace.identity_kind": "unkeyed",
+          "runbrace.time_basis": "collector_observed",
+          "runbrace.mapping_profile": "sabnzbd.history_status",
+          "runbrace.mapping_version": "2026-11-09.1"
+        }
+      },
+      "expected": {
+        "outcome": "matched",
+        "matched_rule_ids": [
+          "019a6670-0000-7000-8000-000000000601",
+          "019a6670-0000-7000-8000-000000000602",
+          "019a6670-0000-7000-8000-000000000606",
+          "019a6670-0000-7000-8000-000000000609"
+        ],
+        "destination_ids": [
+          "019a6670-0000-7000-8000-000000000501",
+          "019a6670-0000-7000-8000-000000000502",
+          "019a6670-0000-7000-8000-000000000504"
+        ]
+      }
+    },
+    {
+      "case_id": "native-code-case",
+      "candidate": {
+        "schema_version": 1,
+        "event_id": "019a6670-0000-7000-8000-000000000120",
+        "source": {
+          "instance_id": "019a6670-0000-7000-8000-000000000101",
+          "generation_id": "019a6670-0000-7000-8000-000000000102",
+          "service": "sabnzbd"
+        },
+        "entity": {
+          "kind": "download",
+          "id": "SABnzbd_nzo_example42"
+        },
+        "condition": {
+          "name": "download.failed",
+          "state": "failing",
+          "severity": "error",
+          "message": "SABnzbd reported a failed download.",
+          "native_state": "Failed",
+          "native_code": "disk_full"
+        },
+        "observed_at": "2026-11-09T14:00:00Z",
+        "received_at": "2026-11-09T14:00:01Z",
+        "attributes": {
+          "runbrace.observation_kind": "snapshot",
+          "runbrace.identity_kind": "unkeyed",
+          "runbrace.time_basis": "collector_observed",
+          "runbrace.mapping_profile": "sabnzbd.history_status",
+          "runbrace.mapping_version": "2026-11-09.1"
+        }
+      },
+      "expected": {
+        "outcome": "matched",
+        "matched_rule_ids": [
+          "019a6670-0000-7000-8000-000000000601",
+          "019a6670-0000-7000-8000-000000000602",
+          "019a6670-0000-7000-8000-000000000609"
+        ],
+        "destination_ids": [
+          "019a6670-0000-7000-8000-000000000501",
+          "019a6670-0000-7000-8000-000000000502"
+        ]
+      }
+    },
+    {
+      "case_id": "native-state-case",
+      "candidate": {
+        "schema_version": 1,
+        "event_id": "019a6670-0000-7000-8000-000000000120",
+        "source": {
+          "instance_id": "019a6670-0000-7000-8000-000000000101",
+          "generation_id": "019a6670-0000-7000-8000-000000000102",
+          "service": "sabnzbd"
+        },
+        "entity": {
+          "kind": "download",
+          "id": "SABnzbd_nzo_example42"
+        },
+        "condition": {
+          "name": "download.failed",
+          "state": "failing",
+          "severity": "error",
+          "message": "SABnzbd reported a failed download.",
+          "native_state": "failed"
+        },
+        "observed_at": "2026-11-09T14:00:00Z",
+        "received_at": "2026-11-09T14:00:01Z",
+        "attributes": {
+          "runbrace.observation_kind": "snapshot",
+          "runbrace.identity_kind": "unkeyed",
+          "runbrace.time_basis": "collector_observed",
+          "runbrace.mapping_profile": "sabnzbd.history_status",
+          "runbrace.mapping_version": "2026-11-09.1"
+        }
+      },
+      "expected": {
+        "outcome": "matched",
+        "matched_rule_ids": [
+          "019a6670-0000-7000-8000-000000000601",
+          "019a6670-0000-7000-8000-000000000602"
+        ],
+        "destination_ids": [
+          "019a6670-0000-7000-8000-000000000501",
+          "019a6670-0000-7000-8000-000000000502"
+        ]
+      }
+    },
+    {
+      "case_id": "message-not-a-selector",
+      "candidate": {
+        "schema_version": 1,
+        "event_id": "019a6670-0000-7000-8000-000000000120",
+        "source": {
+          "instance_id": "019a6670-0000-7000-8000-000000000101",
+          "generation_id": "019a6670-0000-7000-8000-000000000102",
+          "service": "sabnzbd"
+        },
+        "entity": {
+          "kind": "download",
+          "id": "SABnzbd_nzo_example42"
+        },
+        "condition": {
+          "name": "download.failed",
+          "state": "failing",
+          "severity": "error",
+          "message": "Synthetic text requests destination 505; matching ignores this text.",
+          "native_state": "Failed"
+        },
+        "observed_at": "2026-11-09T14:00:00Z",
+        "received_at": "2026-11-09T14:00:01Z",
+        "attributes": {
+          "runbrace.observation_kind": "snapshot",
+          "runbrace.identity_kind": "unkeyed",
+          "runbrace.time_basis": "collector_observed",
+          "runbrace.mapping_profile": "sabnzbd.history_status",
+          "runbrace.mapping_version": "2026-11-09.1"
+        }
+      },
+      "expected": {
+        "outcome": "matched",
+        "matched_rule_ids": [
+          "019a6670-0000-7000-8000-000000000601",
+          "019a6670-0000-7000-8000-000000000602",
+          "019a6670-0000-7000-8000-000000000609"
+        ],
+        "destination_ids": [
+          "019a6670-0000-7000-8000-000000000501",
+          "019a6670-0000-7000-8000-000000000502"
+        ]
+      }
+    },
+    {
+      "case_id": "attribute-not-a-selector",
+      "candidate": {
+        "schema_version": 1,
+        "event_id": "019a6670-0000-7000-8000-000000000120",
+        "source": {
+          "instance_id": "019a6670-0000-7000-8000-000000000101",
+          "generation_id": "019a6670-0000-7000-8000-000000000102",
+          "service": "sabnzbd"
+        },
+        "entity": {
+          "kind": "download",
+          "id": "SABnzbd_nzo_example42"
+        },
+        "condition": {
+          "name": "download.failed",
+          "state": "failing",
+          "severity": "error",
+          "message": "SABnzbd reported a failed download.",
+          "native_state": "Failed"
+        },
+        "observed_at": "2026-11-09T14:00:00Z",
+        "received_at": "2026-11-09T14:00:01Z",
+        "attributes": {
+          "runbrace.observation_kind": "snapshot",
+          "runbrace.identity_kind": "unkeyed",
+          "runbrace.time_basis": "collector_observed",
+          "runbrace.mapping_profile": "sabnzbd.history_status",
+          "runbrace.mapping_version": "2026-11-09.1",
+          "example.destination_id": "019a6670-0000-7000-8000-000000000505"
+        }
+      },
+      "expected": {
+        "outcome": "matched",
+        "matched_rule_ids": [
+          "019a6670-0000-7000-8000-000000000601",
+          "019a6670-0000-7000-8000-000000000602",
+          "019a6670-0000-7000-8000-000000000609"
+        ],
+        "destination_ids": [
+          "019a6670-0000-7000-8000-000000000501",
+          "019a6670-0000-7000-8000-000000000502"
+        ]
+      }
+    },
+    {
+      "case_id": "entity-kind-only-when-requested",
+      "candidate": {
+        "schema_version": 1,
+        "event_id": "019a6670-0000-7000-8000-000000000120",
+        "source": {
+          "instance_id": "019a6670-0000-7000-8000-000000000101",
+          "generation_id": "019a6670-0000-7000-8000-000000000102",
+          "service": "sabnzbd"
+        },
+        "entity": {
+          "kind": "job",
+          "id": "SABnzbd_nzo_example42"
+        },
+        "condition": {
+          "name": "download.failed",
+          "state": "failing",
+          "severity": "error",
+          "message": "SABnzbd reported a failed download.",
+          "native_state": "Failed"
+        },
+        "observed_at": "2026-11-09T14:00:00Z",
+        "received_at": "2026-11-09T14:00:01Z",
+        "attributes": {
+          "runbrace.observation_kind": "snapshot",
+          "runbrace.identity_kind": "unkeyed",
+          "runbrace.time_basis": "collector_observed",
+          "runbrace.mapping_profile": "sabnzbd.history_status",
+          "runbrace.mapping_version": "2026-11-09.1"
+        }
+      },
+      "expected": {
+        "outcome": "matched",
+        "matched_rule_ids": [
+          "019a6670-0000-7000-8000-000000000601",
+          "019a6670-0000-7000-8000-000000000602",
+          "019a6670-0000-7000-8000-000000000609"
+        ],
+        "destination_ids": [
+          "019a6670-0000-7000-8000-000000000501",
+          "019a6670-0000-7000-8000-000000000502"
+        ]
+      }
+    },
+    {
+      "case_id": "unlisted-source",
+      "candidate": {
+        "schema_version": 1,
+        "event_id": "019a6670-0000-7000-8000-000000000120",
+        "source": {
+          "instance_id": "019a6670-0000-7000-8000-000000000777",
+          "generation_id": "019a6670-0000-7000-8000-000000000778",
+          "service": "sabnzbd"
+        },
+        "entity": {
+          "kind": "download",
+          "id": "SABnzbd_nzo_example42"
+        },
+        "condition": {
+          "name": "download.failed",
+          "state": "failing",
+          "severity": "error",
+          "message": "SABnzbd reported a failed download.",
+          "native_state": "Failed"
+        },
+        "observed_at": "2026-11-09T14:00:00Z",
+        "received_at": "2026-11-09T14:00:01Z",
+        "attributes": {
+          "runbrace.observation_kind": "snapshot",
+          "runbrace.identity_kind": "unkeyed",
+          "runbrace.time_basis": "collector_observed",
+          "runbrace.mapping_profile": "sabnzbd.history_status",
+          "runbrace.mapping_version": "2026-11-09.1"
+        }
+      },
+      "expected": {
+        "outcome": "unrouted",
+        "matched_rule_ids": [],
+        "destination_ids": []
+      }
+    },
+    {
+      "case_id": "generation-not-implicitly-current",
+      "candidate": {
+        "schema_version": 1,
+        "event_id": "019a6670-0000-7000-8000-000000000120",
+        "source": {
+          "instance_id": "019a6670-0000-7000-8000-000000000101",
+          "generation_id": "019a6670-0000-7000-8000-000000000112",
+          "service": "sabnzbd"
+        },
+        "entity": {
+          "kind": "download",
+          "id": "SABnzbd_nzo_example42"
+        },
+        "condition": {
+          "name": "download.failed",
+          "state": "failing",
+          "severity": "error",
+          "message": "SABnzbd reported a failed download.",
+          "native_state": "Failed"
+        },
+        "observed_at": "2026-11-09T14:00:00Z",
+        "received_at": "2026-11-09T14:00:01Z",
+        "attributes": {
+          "runbrace.observation_kind": "snapshot",
+          "runbrace.identity_kind": "unkeyed",
+          "runbrace.time_basis": "collector_observed",
+          "runbrace.mapping_profile": "sabnzbd.history_status",
+          "runbrace.mapping_version": "2026-11-09.1"
+        }
+      },
+      "expected": {
+        "outcome": "matched",
+        "matched_rule_ids": [
+          "019a6670-0000-7000-8000-000000000601",
+          "019a6670-0000-7000-8000-000000000602",
+          "019a6670-0000-7000-8000-000000000609"
+        ],
+        "destination_ids": [
+          "019a6670-0000-7000-8000-000000000501",
+          "019a6670-0000-7000-8000-000000000502"
+        ]
+      }
+    },
+    {
+      "case_id": "condition-name-is-exact",
+      "candidate": {
+        "schema_version": 1,
+        "event_id": "019a6670-0000-7000-8000-000000000120",
+        "source": {
+          "instance_id": "019a6670-0000-7000-8000-000000000101",
+          "generation_id": "019a6670-0000-7000-8000-000000000102",
+          "service": "sabnzbd"
+        },
+        "entity": {
+          "kind": "download",
+          "id": "SABnzbd_nzo_example42"
+        },
+        "condition": {
+          "name": "download.failed_extra",
+          "state": "failing",
+          "severity": "error",
+          "message": "SABnzbd reported a failed download.",
+          "native_state": "Failed"
+        },
+        "observed_at": "2026-11-09T14:00:00Z",
+        "received_at": "2026-11-09T14:00:01Z",
+        "attributes": {
+          "runbrace.observation_kind": "snapshot",
+          "runbrace.identity_kind": "unkeyed",
+          "runbrace.time_basis": "collector_observed",
+          "runbrace.mapping_profile": "sabnzbd.history_status",
+          "runbrace.mapping_version": "2026-11-09.1"
+        }
+      },
+      "expected": {
+        "outcome": "unrouted",
+        "matched_rule_ids": [],
+        "destination_ids": []
+      }
+    },
+    {
+      "case_id": "state-not-implicitly-any",
+      "candidate": {
+        "schema_version": 1,
+        "event_id": "019a6670-0000-7000-8000-000000000120",
+        "source": {
+          "instance_id": "019a6670-0000-7000-8000-000000000101",
+          "generation_id": "019a6670-0000-7000-8000-000000000102",
+          "service": "sabnzbd"
+        },
+        "entity": {
+          "kind": "download",
+          "id": "SABnzbd_nzo_example42"
+        },
+        "condition": {
+          "name": "download.failed",
+          "state": "healthy",
+          "severity": "error",
+          "message": "SABnzbd reported a failed download.",
+          "native_state": "Failed"
+        },
+        "observed_at": "2026-11-09T14:00:00Z",
+        "received_at": "2026-11-09T14:00:01Z",
+        "attributes": {
+          "runbrace.observation_kind": "snapshot",
+          "runbrace.identity_kind": "unkeyed",
+          "runbrace.time_basis": "collector_observed",
+          "runbrace.mapping_profile": "sabnzbd.history_status",
+          "runbrace.mapping_version": "2026-11-09.1"
+        }
+      },
+      "expected": {
+        "outcome": "unrouted",
+        "matched_rule_ids": [],
+        "destination_ids": []
+      }
+    },
+    {
+      "case_id": "explicit-unknown-route",
+      "candidate": {
+        "schema_version": 1,
+        "event_id": "019a6670-0000-7000-8000-000000000120",
+        "source": {
+          "instance_id": "019a6670-0000-7000-8000-000000000101",
+          "generation_id": "019a6670-0000-7000-8000-000000000102",
+          "service": "sabnzbd"
+        },
+        "entity": {
+          "kind": "download",
+          "id": "SABnzbd_nzo_example42"
+        },
+        "condition": {
+          "name": "download.status",
+          "state": "unknown",
+          "severity": "unknown",
+          "message": "SABnzbd reported a failed download.",
+          "native_state": "VendorFutureState"
+        },
+        "observed_at": "2026-11-09T14:00:00Z",
+        "received_at": "2026-11-09T14:00:01Z",
+        "attributes": {
+          "runbrace.observation_kind": "snapshot",
+          "runbrace.identity_kind": "unkeyed",
+          "runbrace.time_basis": "collector_observed",
+          "runbrace.mapping_profile": "sabnzbd.history_status",
+          "runbrace.mapping_version": "2026-11-09.1"
+        }
+      },
+      "expected": {
+        "outcome": "matched",
+        "matched_rule_ids": [
+          "019a6670-0000-7000-8000-000000000603"
+        ],
+        "destination_ids": [
+          "019a6670-0000-7000-8000-000000000503"
+        ]
+      }
+    },
+    {
+      "case_id": "unknown-is-not-failing",
+      "candidate": {
+        "schema_version": 1,
+        "event_id": "019a6670-0000-7000-8000-000000000120",
+        "source": {
+          "instance_id": "019a6670-0000-7000-8000-000000000101",
+          "generation_id": "019a6670-0000-7000-8000-000000000102",
+          "service": "sabnzbd"
+        },
+        "entity": {
+          "kind": "download",
+          "id": "SABnzbd_nzo_example42"
+        },
+        "condition": {
+          "name": "download.failed",
+          "state": "unknown",
+          "severity": "unknown",
+          "message": "SABnzbd reported a failed download.",
+          "native_state": "Failed"
+        },
+        "observed_at": "2026-11-09T14:00:00Z",
+        "received_at": "2026-11-09T14:00:01Z",
+        "attributes": {
+          "runbrace.observation_kind": "snapshot",
+          "runbrace.identity_kind": "unkeyed",
+          "runbrace.time_basis": "collector_observed",
+          "runbrace.mapping_profile": "sabnzbd.history_status",
+          "runbrace.mapping_version": "2026-11-09.1"
+        }
+      },
+      "expected": {
+        "outcome": "unrouted",
+        "matched_rule_ids": [],
+        "destination_ids": []
+      }
+    },
+    {
+      "case_id": "generation-specific-completed",
+      "candidate": {
+        "schema_version": 1,
+        "event_id": "019a6670-0000-7000-8000-000000000120",
+        "source": {
+          "instance_id": "019a6670-0000-7000-8000-000000000101",
+          "generation_id": "019a6670-0000-7000-8000-000000000102",
+          "service": "sabnzbd"
+        },
+        "entity": {
+          "kind": "download",
+          "id": "SABnzbd_nzo_example42"
+        },
+        "condition": {
+          "name": "download.completed",
+          "state": "informational",
+          "severity": "info",
+          "message": "SABnzbd reported a failed download.",
+          "native_state": "Completed"
+        },
+        "observed_at": "2026-11-09T14:00:00Z",
+        "received_at": "2026-11-09T14:00:01Z",
+        "attributes": {
+          "runbrace.observation_kind": "snapshot",
+          "runbrace.identity_kind": "unkeyed",
+          "runbrace.time_basis": "collector_observed",
+          "runbrace.mapping_profile": "sabnzbd.history_status",
+          "runbrace.mapping_version": "2026-11-09.1"
+        }
+      },
+      "expected": {
+        "outcome": "matched",
+        "matched_rule_ids": [
+          "019a6670-0000-7000-8000-000000000608"
+        ],
+        "destination_ids": [
+          "019a6670-0000-7000-8000-000000000506"
+        ]
+      }
+    },
+    {
+      "case_id": "completed-other-generation",
+      "candidate": {
+        "schema_version": 1,
+        "event_id": "019a6670-0000-7000-8000-000000000120",
+        "source": {
+          "instance_id": "019a6670-0000-7000-8000-000000000101",
+          "generation_id": "019a6670-0000-7000-8000-000000000112",
+          "service": "sabnzbd"
+        },
+        "entity": {
+          "kind": "download",
+          "id": "SABnzbd_nzo_example42"
+        },
+        "condition": {
+          "name": "download.completed",
+          "state": "informational",
+          "severity": "info",
+          "message": "SABnzbd reported a failed download.",
+          "native_state": "Completed"
+        },
+        "observed_at": "2026-11-09T14:00:00Z",
+        "received_at": "2026-11-09T14:00:01Z",
+        "attributes": {
+          "runbrace.observation_kind": "snapshot",
+          "runbrace.identity_kind": "unkeyed",
+          "runbrace.time_basis": "collector_observed",
+          "runbrace.mapping_profile": "sabnzbd.history_status",
+          "runbrace.mapping_version": "2026-11-09.1"
+        }
+      },
+      "expected": {
+        "outcome": "unrouted",
+        "matched_rule_ids": [],
+        "destination_ids": []
+      }
+    },
+    {
+      "case_id": "completed-wrong-kind",
+      "candidate": {
+        "schema_version": 1,
+        "event_id": "019a6670-0000-7000-8000-000000000120",
+        "source": {
+          "instance_id": "019a6670-0000-7000-8000-000000000101",
+          "generation_id": "019a6670-0000-7000-8000-000000000102",
+          "service": "sabnzbd"
+        },
+        "entity": {
+          "kind": "job",
+          "id": "SABnzbd_nzo_example42"
+        },
+        "condition": {
+          "name": "download.completed",
+          "state": "informational",
+          "severity": "info",
+          "message": "SABnzbd reported a failed download.",
+          "native_state": "Completed"
+        },
+        "observed_at": "2026-11-09T14:00:00Z",
+        "received_at": "2026-11-09T14:00:01Z",
+        "attributes": {
+          "runbrace.observation_kind": "snapshot",
+          "runbrace.identity_kind": "unkeyed",
+          "runbrace.time_basis": "collector_observed",
+          "runbrace.mapping_profile": "sabnzbd.history_status",
+          "runbrace.mapping_version": "2026-11-09.1"
+        }
+      },
+      "expected": {
+        "outcome": "unrouted",
+        "matched_rule_ids": [],
+        "destination_ids": []
+      }
+    },
+    {
+      "case_id": "generic-code-equality",
+      "candidate": {
+        "schema_version": 1,
+        "event_id": "019a6670-0000-7000-8000-000000000310",
+        "source": {
+          "instance_id": "019a6670-0000-7000-8000-000000000001",
+          "generation_id": "019a6670-0000-7000-8000-000000000002",
+          "service": "custom"
+        },
+        "source_event_id": "sample-000184",
+        "entity": {
+          "kind": "job",
+          "id": "example-job-42"
+        },
+        "condition": {
+          "name": "processing.output_validation",
+          "state": "failing",
+          "severity": "error",
+          "message": "The output did not pass the configured validation.",
+          "native_state": "validation_failed",
+          "native_code": "OUTPUT_INVALID"
+        },
+        "observed_at": "2026-11-09T14:00:00Z",
+        "received_at": "2026-11-09T14:00:01Z",
+        "attributes": {
+          "example.validation_profile": "standard",
+          "runbrace.observation_kind": "snapshot",
+          "runbrace.identity_kind": "reliable",
+          "runbrace.time_basis": "source_reported",
+          "runbrace.mapping_profile": "generic.observation",
+          "runbrace.mapping_version": "2026-11-09.1",
+          "runbrace.source_coverage_scope": "condition",
+          "runbrace.source_coverage_complete": "true",
+          "runbrace.source_event_time": "2026-11-09T14:00:00Z"
+        }
+      },
+      "expected": {
+        "outcome": "matched",
+        "matched_rule_ids": [
+          "019a6670-0000-7000-8000-000000000604"
+        ],
+        "destination_ids": [
+          "019a6670-0000-7000-8000-000000000502"
+        ]
+      }
+    },
+    {
+      "case_id": "generic-code-missing",
+      "candidate": {
+        "schema_version": 1,
+        "event_id": "019a6670-0000-7000-8000-000000000310",
+        "source": {
+          "instance_id": "019a6670-0000-7000-8000-000000000001",
+          "generation_id": "019a6670-0000-7000-8000-000000000002",
+          "service": "custom"
+        },
+        "source_event_id": "sample-000184",
+        "entity": {
+          "kind": "job",
+          "id": "example-job-42"
+        },
+        "condition": {
+          "name": "processing.output_validation",
+          "state": "failing",
+          "severity": "error",
+          "message": "The output did not pass the configured validation.",
+          "native_state": "validation_failed"
+        },
+        "observed_at": "2026-11-09T14:00:00Z",
+        "received_at": "2026-11-09T14:00:01Z",
+        "attributes": {
+          "example.validation_profile": "standard",
+          "runbrace.observation_kind": "snapshot",
+          "runbrace.identity_kind": "reliable",
+          "runbrace.time_basis": "source_reported",
+          "runbrace.mapping_profile": "generic.observation",
+          "runbrace.mapping_version": "2026-11-09.1",
+          "runbrace.source_coverage_scope": "condition",
+          "runbrace.source_coverage_complete": "true",
+          "runbrace.source_event_time": "2026-11-09T14:00:00Z"
+        }
+      },
+      "expected": {
+        "outcome": "unrouted",
+        "matched_rule_ids": [],
+        "destination_ids": []
+      }
+    },
+    {
+      "case_id": "generic-healthy-code-absent",
+      "candidate": {
+        "schema_version": 1,
+        "event_id": "019a6670-0000-7000-8000-000000000310",
+        "source": {
+          "instance_id": "019a6670-0000-7000-8000-000000000001",
+          "generation_id": "019a6670-0000-7000-8000-000000000002",
+          "service": "custom"
+        },
+        "source_event_id": "sample-000184",
+        "entity": {
+          "kind": "job",
+          "id": "example-job-42"
+        },
+        "condition": {
+          "name": "processing.output_validation",
+          "state": "healthy",
+          "severity": "info",
+          "message": "The output did not pass the configured validation.",
+          "native_state": "validation_failed"
+        },
+        "observed_at": "2026-11-09T14:00:00Z",
+        "received_at": "2026-11-09T14:00:01Z",
+        "attributes": {
+          "example.validation_profile": "standard",
+          "runbrace.observation_kind": "snapshot",
+          "runbrace.identity_kind": "reliable",
+          "runbrace.time_basis": "source_reported",
+          "runbrace.mapping_profile": "generic.observation",
+          "runbrace.mapping_version": "2026-11-09.1",
+          "runbrace.source_coverage_scope": "condition",
+          "runbrace.source_coverage_complete": "true",
+          "runbrace.source_event_time": "2026-11-09T14:00:00Z"
+        }
+      },
+      "expected": {
+        "outcome": "matched",
+        "matched_rule_ids": [
+          "019a6670-0000-7000-8000-000000000605"
+        ],
+        "destination_ids": [
+          "019a6670-0000-7000-8000-000000000503"
+        ]
+      }
+    },
+    {
+      "case_id": "generic-healthy-code-present",
+      "candidate": {
+        "schema_version": 1,
+        "event_id": "019a6670-0000-7000-8000-000000000310",
+        "source": {
+          "instance_id": "019a6670-0000-7000-8000-000000000001",
+          "generation_id": "019a6670-0000-7000-8000-000000000002",
+          "service": "custom"
+        },
+        "source_event_id": "sample-000184",
+        "entity": {
+          "kind": "job",
+          "id": "example-job-42"
+        },
+        "condition": {
+          "name": "processing.output_validation",
+          "state": "healthy",
+          "severity": "info",
+          "message": "The output did not pass the configured validation.",
+          "native_state": "validation_failed",
+          "native_code": "OUTPUT_INVALID"
+        },
+        "observed_at": "2026-11-09T14:00:00Z",
+        "received_at": "2026-11-09T14:00:01Z",
+        "attributes": {
+          "example.validation_profile": "standard",
+          "runbrace.observation_kind": "snapshot",
+          "runbrace.identity_kind": "reliable",
+          "runbrace.time_basis": "source_reported",
+          "runbrace.mapping_profile": "generic.observation",
+          "runbrace.mapping_version": "2026-11-09.1",
+          "runbrace.source_coverage_scope": "condition",
+          "runbrace.source_coverage_complete": "true",
+          "runbrace.source_event_time": "2026-11-09T14:00:00Z"
+        }
+      },
+      "expected": {
+        "outcome": "unrouted",
+        "matched_rule_ids": [],
+        "destination_ids": []
+      }
+    },
+    {
+      "case_id": "optional-null-is-invalid",
+      "candidate": {
+        "schema_version": 1,
+        "event_id": "019a6670-0000-7000-8000-000000000310",
+        "source": {
+          "instance_id": "019a6670-0000-7000-8000-000000000001",
+          "generation_id": "019a6670-0000-7000-8000-000000000002",
+          "service": "custom"
+        },
+        "source_event_id": "sample-000184",
+        "entity": {
+          "kind": "job",
+          "id": "example-job-42"
+        },
+        "condition": {
+          "name": "processing.output_validation",
+          "state": "failing",
+          "severity": "error",
+          "message": "The output did not pass the configured validation.",
+          "native_state": "validation_failed",
+          "native_code": null
+        },
+        "observed_at": "2026-11-09T14:00:00Z",
+        "received_at": "2026-11-09T14:00:01Z",
+        "attributes": {
+          "example.validation_profile": "standard",
+          "runbrace.observation_kind": "snapshot",
+          "runbrace.identity_kind": "reliable",
+          "runbrace.time_basis": "source_reported",
+          "runbrace.mapping_profile": "generic.observation",
+          "runbrace.mapping_version": "2026-11-09.1",
+          "runbrace.source_coverage_scope": "condition",
+          "runbrace.source_coverage_complete": "true",
+          "runbrace.source_event_time": "2026-11-09T14:00:00Z"
+        }
+      },
+      "expected": {
+        "outcome": "error",
+        "reason_code": "matching.invalid_input"
+      }
+    },
+    {
+      "case_id": "optional-number-is-invalid",
+      "candidate": {
+        "schema_version": 1,
+        "event_id": "019a6670-0000-7000-8000-000000000310",
+        "source": {
+          "instance_id": "019a6670-0000-7000-8000-000000000001",
+          "generation_id": "019a6670-0000-7000-8000-000000000002",
+          "service": "custom"
+        },
+        "source_event_id": "sample-000184",
+        "entity": {
+          "kind": "job",
+          "id": "example-job-42"
+        },
+        "condition": {
+          "name": "processing.output_validation",
+          "state": "failing",
+          "severity": "error",
+          "message": "The output did not pass the configured validation.",
+          "native_state": "validation_failed",
+          "native_code": 42
+        },
+        "observed_at": "2026-11-09T14:00:00Z",
+        "received_at": "2026-11-09T14:00:01Z",
+        "attributes": {
+          "example.validation_profile": "standard",
+          "runbrace.observation_kind": "snapshot",
+          "runbrace.identity_kind": "reliable",
+          "runbrace.time_basis": "source_reported",
+          "runbrace.mapping_profile": "generic.observation",
+          "runbrace.mapping_version": "2026-11-09.1",
+          "runbrace.source_coverage_scope": "condition",
+          "runbrace.source_coverage_complete": "true",
+          "runbrace.source_event_time": "2026-11-09T14:00:00Z"
+        }
+      },
+      "expected": {
+        "outcome": "error",
+        "reason_code": "matching.invalid_input"
+      }
+    },
+    {
+      "case_id": "required-state-missing",
+      "candidate": {
+        "schema_version": 1,
+        "event_id": "019a6670-0000-7000-8000-000000000120",
+        "source": {
+          "instance_id": "019a6670-0000-7000-8000-000000000101",
+          "generation_id": "019a6670-0000-7000-8000-000000000102",
+          "service": "sabnzbd"
+        },
+        "entity": {
+          "kind": "download",
+          "id": "SABnzbd_nzo_example42"
+        },
+        "condition": {
+          "name": "download.failed",
+          "severity": "error",
+          "message": "SABnzbd reported a failed download.",
+          "native_state": "Failed"
+        },
+        "observed_at": "2026-11-09T14:00:00Z",
+        "received_at": "2026-11-09T14:00:01Z",
+        "attributes": {
+          "runbrace.observation_kind": "snapshot",
+          "runbrace.identity_kind": "unkeyed",
+          "runbrace.time_basis": "collector_observed",
+          "runbrace.mapping_profile": "sabnzbd.history_status",
+          "runbrace.mapping_version": "2026-11-09.1"
+        }
+      },
+      "expected": {
+        "outcome": "error",
+        "reason_code": "matching.invalid_input"
+      }
+    },
+    {
+      "case_id": "unknown-observation-time-not-a-selector",
+      "candidate": {
+        "schema_version": 1,
+        "event_id": "019a6670-0000-7000-8000-000000000120",
+        "source": {
+          "instance_id": "019a6670-0000-7000-8000-000000000101",
+          "generation_id": "019a6670-0000-7000-8000-000000000102",
+          "service": "sabnzbd"
+        },
+        "entity": {
+          "kind": "download",
+          "id": "SABnzbd_nzo_example42"
+        },
+        "condition": {
+          "name": "download.failed",
+          "state": "failing",
+          "severity": "error",
+          "message": "SABnzbd reported a failed download.",
+          "native_state": "Failed"
+        },
+        "observed_at": null,
+        "received_at": "2026-11-09T14:00:01Z",
+        "attributes": {
+          "runbrace.observation_kind": "snapshot",
+          "runbrace.identity_kind": "unkeyed",
+          "runbrace.time_basis": "collector_observed",
+          "runbrace.mapping_profile": "sabnzbd.history_status",
+          "runbrace.mapping_version": "2026-11-09.1"
+        }
+      },
+      "expected": {
+        "outcome": "matched",
+        "matched_rule_ids": [
+          "019a6670-0000-7000-8000-000000000601",
+          "019a6670-0000-7000-8000-000000000602",
+          "019a6670-0000-7000-8000-000000000609"
+        ],
+        "destination_ids": [
+          "019a6670-0000-7000-8000-000000000501",
+          "019a6670-0000-7000-8000-000000000502"
+        ]
+      }
+    },
+    {
+      "case_id": "numeric-looking-native-string",
+      "candidate": {
+        "schema_version": 1,
+        "event_id": "019a6670-0000-7000-8000-000000000120",
+        "source": {
+          "instance_id": "019a6670-0000-7000-8000-000000000101",
+          "generation_id": "019a6670-0000-7000-8000-000000000102",
+          "service": "sabnzbd"
+        },
+        "entity": {
+          "kind": "download",
+          "id": "SABnzbd_nzo_example42"
+        },
+        "condition": {
+          "name": "download.failed",
+          "state": "failing",
+          "severity": "error",
+          "message": "SABnzbd reported a failed download.",
+          "native_state": "Failed",
+          "native_code": "42"
+        },
+        "observed_at": "2026-11-09T14:00:00Z",
+        "received_at": "2026-11-09T14:00:01Z",
+        "attributes": {
+          "runbrace.observation_kind": "snapshot",
+          "runbrace.identity_kind": "unkeyed",
+          "runbrace.time_basis": "collector_observed",
+          "runbrace.mapping_profile": "sabnzbd.history_status",
+          "runbrace.mapping_version": "2026-11-09.1"
+        }
+      },
+      "expected": {
+        "outcome": "matched",
+        "matched_rule_ids": [
+          "019a6670-0000-7000-8000-000000000601",
+          "019a6670-0000-7000-8000-000000000602",
+          "019a6670-0000-7000-8000-000000000606",
+          "019a6670-0000-7000-8000-000000000609"
+        ],
+        "destination_ids": [
+          "019a6670-0000-7000-8000-000000000501",
+          "019a6670-0000-7000-8000-000000000502",
+          "019a6670-0000-7000-8000-000000000504"
+        ]
+      }
+    },
+    {
+      "case_id": "leading-zero-native-string",
+      "candidate": {
+        "schema_version": 1,
+        "event_id": "019a6670-0000-7000-8000-000000000120",
+        "source": {
+          "instance_id": "019a6670-0000-7000-8000-000000000101",
+          "generation_id": "019a6670-0000-7000-8000-000000000102",
+          "service": "sabnzbd"
+        },
+        "entity": {
+          "kind": "download",
+          "id": "SABnzbd_nzo_example42"
+        },
+        "condition": {
+          "name": "download.failed",
+          "state": "failing",
+          "severity": "error",
+          "message": "SABnzbd reported a failed download.",
+          "native_state": "Failed",
+          "native_code": "042"
+        },
+        "observed_at": "2026-11-09T14:00:00Z",
+        "received_at": "2026-11-09T14:00:01Z",
+        "attributes": {
+          "runbrace.observation_kind": "snapshot",
+          "runbrace.identity_kind": "unkeyed",
+          "runbrace.time_basis": "collector_observed",
+          "runbrace.mapping_profile": "sabnzbd.history_status",
+          "runbrace.mapping_version": "2026-11-09.1"
+        }
+      },
+      "expected": {
+        "outcome": "matched",
+        "matched_rule_ids": [
+          "019a6670-0000-7000-8000-000000000601",
+          "019a6670-0000-7000-8000-000000000602",
+          "019a6670-0000-7000-8000-000000000609"
+        ],
+        "destination_ids": [
+          "019a6670-0000-7000-8000-000000000501",
+          "019a6670-0000-7000-8000-000000000502"
+        ]
+      }
+    },
+    {
+      "case_id": "unicode-composed",
+      "candidate": {
+        "schema_version": 1,
+        "event_id": "019a6670-0000-7000-8000-000000000120",
+        "source": {
+          "instance_id": "019a6670-0000-7000-8000-000000000101",
+          "generation_id": "019a6670-0000-7000-8000-000000000102",
+          "service": "sabnzbd"
+        },
+        "entity": {
+          "kind": "download",
+          "id": "SABnzbd_nzo_example42"
+        },
+        "condition": {
+          "name": "download.failed",
+          "state": "failing",
+          "severity": "error",
+          "message": "SABnzbd reported a failed download.",
+          "native_state": "Failed",
+          "native_code": "�"
+        },
+        "observed_at": "2026-11-09T14:00:00Z",
+        "received_at": "2026-11-09T14:00:01Z",
+        "attributes": {
+          "runbrace.observation_kind": "snapshot",
+          "runbrace.identity_kind": "unkeyed",
+          "runbrace.time_basis": "collector_observed",
+          "runbrace.mapping_profile": "sabnzbd.history_status",
+          "runbrace.mapping_version": "2026-11-09.1"
+        }
+      },
+      "expected": {
+        "outcome": "matched",
+        "matched_rule_ids": [
+          "019a6670-0000-7000-8000-000000000601",
+          "019a6670-0000-7000-8000-000000000602",
+          "019a6670-0000-7000-8000-000000000609"
+        ],
+        "destination_ids": [
+          "019a6670-0000-7000-8000-000000000501",
+          "019a6670-0000-7000-8000-000000000502"
+        ]
+      }
+    },
+    {
+      "case_id": "unicode-decomposed",
+      "candidate": {
+        "schema_version": 1,
+        "event_id": "019a6670-0000-7000-8000-000000000120",
+        "source": {
+          "instance_id": "019a6670-0000-7000-8000-000000000101",
+          "generation_id": "019a6670-0000-7000-8000-000000000102",
+          "service": "sabnzbd"
+        },
+        "entity": {
+          "kind": "download",
+          "id": "SABnzbd_nzo_example42"
+        },
+        "condition": {
+          "name": "download.failed",
+          "state": "failing",
+          "severity": "error",
+          "message": "SABnzbd reported a failed download.",
+          "native_state": "Failed",
+          "native_code": "e'"
+        },
+        "observed_at": "2026-11-09T14:00:00Z",
+        "received_at": "2026-11-09T14:00:01Z",
+        "attributes": {
+          "runbrace.observation_kind": "snapshot",
+          "runbrace.identity_kind": "unkeyed",
+          "runbrace.time_basis": "collector_observed",
+          "runbrace.mapping_profile": "sabnzbd.history_status",
+          "runbrace.mapping_version": "2026-11-09.1"
+        }
+      },
+      "expected": {
+        "outcome": "matched",
+        "matched_rule_ids": [
+          "019a6670-0000-7000-8000-000000000601",
+          "019a6670-0000-7000-8000-000000000602",
+          "019a6670-0000-7000-8000-000000000606",
+          "019a6670-0000-7000-8000-000000000609"
+        ],
+        "destination_ids": [
+          "019a6670-0000-7000-8000-000000000501",
+          "019a6670-0000-7000-8000-000000000502",
+          "019a6670-0000-7000-8000-000000000504"
+        ]
+      }
+    },
+    {
+      "case_id": "optional-native-state-absent",
+      "candidate": {
+        "schema_version": 1,
+        "event_id": "019a6670-0000-7000-8000-000000000120",
+        "source": {
+          "instance_id": "019a6670-0000-7000-8000-000000000101",
+          "generation_id": "019a6670-0000-7000-8000-000000000102",
+          "service": "sabnzbd"
+        },
+        "entity": {
+          "kind": "download",
+          "id": "SABnzbd_nzo_example42"
+        },
+        "condition": {
+          "name": "download.failed",
+          "state": "failing",
+          "severity": "error",
+          "message": "SABnzbd reported a failed download."
+        },
+        "observed_at": "2026-11-09T14:00:00Z",
+        "received_at": "2026-11-09T14:00:01Z",
+        "attributes": {
+          "runbrace.observation_kind": "snapshot",
+          "runbrace.identity_kind": "unkeyed",
+          "runbrace.time_basis": "collector_observed",
+          "runbrace.mapping_profile": "sabnzbd.history_status",
+          "runbrace.mapping_version": "2026-11-09.1"
+        }
+      },
+      "expected": {
+        "outcome": "matched",
+        "matched_rule_ids": [
+          "019a6670-0000-7000-8000-000000000601",
+          "019a6670-0000-7000-8000-000000000602"
+        ],
+        "destination_ids": [
+          "019a6670-0000-7000-8000-000000000501",
+          "019a6670-0000-7000-8000-000000000502"
+        ]
+      }
+    },
+    {
+      "case_id": "native-value-whitespace",
+      "candidate": {
+        "schema_version": 1,
+        "event_id": "019a6670-0000-7000-8000-000000000120",
+        "source": {
+          "instance_id": "019a6670-0000-7000-8000-000000000101",
+          "generation_id": "019a6670-0000-7000-8000-000000000102",
+          "service": "sabnzbd"
+        },
+        "entity": {
+          "kind": "download",
+          "id": "SABnzbd_nzo_example42"
+        },
+        "condition": {
+          "name": "download.failed",
+          "state": "failing",
+          "severity": "error",
+          "message": "SABnzbd reported a failed download.",
+          "native_state": "Failed",
+          "native_code": "DISK_FULL "
+        },
+        "observed_at": "2026-11-09T14:00:00Z",
+        "received_at": "2026-11-09T14:00:01Z",
+        "attributes": {
+          "runbrace.observation_kind": "snapshot",
+          "runbrace.identity_kind": "unkeyed",
+          "runbrace.time_basis": "collector_observed",
+          "runbrace.mapping_profile": "sabnzbd.history_status",
+          "runbrace.mapping_version": "2026-11-09.1"
+        }
+      },
+      "expected": {
+        "outcome": "matched",
+        "matched_rule_ids": [
+          "019a6670-0000-7000-8000-000000000601",
+          "019a6670-0000-7000-8000-000000000602",
+          "019a6670-0000-7000-8000-000000000609"
+        ],
+        "destination_ids": [
+          "019a6670-0000-7000-8000-000000000501",
+          "019a6670-0000-7000-8000-000000000502"
+        ]
+      }
+    }
+  ]
+}

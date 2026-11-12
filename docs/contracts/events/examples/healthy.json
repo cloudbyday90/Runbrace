@@ -1,0 +1,32 @@
+{
+  "specversion": "1.0",
+  "id": "sample-000185",
+  "source": "urn:uuid:019a6670-0000-7000-8000-000000000002",
+  "type": "runbrace.observation.v1",
+  "datacontenttype": "application/json",
+  "dataschema": "urn:runbrace:schema:observation-data:1",
+  "time": "2026-11-09T14:05:00Z",
+  "data": {
+    "kind": "snapshot",
+    "observed_at": "2026-11-09T14:05:00Z",
+    "entity": {
+      "kind": "job",
+      "native_id": "example-job-42",
+      "label": "Example processing job"
+    },
+    "signal": {
+      "name": "processing.output_validation",
+      "state": "healthy",
+      "severity": "info",
+      "message": "The output passed the configured validation.",
+      "native_state": "validation_passed"
+    },
+    "coverage": {
+      "scope": "condition",
+      "complete": true
+    },
+    "attributes": {
+      "example.validation_profile": "standard"
+    }
+  }
+}

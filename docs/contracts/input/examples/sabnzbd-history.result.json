@@ -1,0 +1,26 @@
+{
+  "outcome": "emit",
+  "conditions": [
+    {
+      "item_key": "history/0/download_status",
+      "identity": {
+        "mode": "unkeyed",
+        "policy_version": "sabnzbd.history_snapshot_unkeyed_v1"
+      },
+      "entity": {
+        "kind": "download",
+        "id": "SABnzbd_nzo_example42"
+      },
+      "condition": {
+        "name": "download.failed",
+        "state": "failing",
+        "severity": "error",
+        "message": "SABnzbd reported a failed download.",
+        "native_state": "Failed"
+      },
+      "observation_kind": "snapshot",
+      "observation_time_basis": "collector_observed",
+      "observed_at": "2026-11-09T14:00:00Z"
+    }
+  ]
+}

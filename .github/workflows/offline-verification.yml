@@ -1,0 +1,61 @@
+name: Offline verification
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: offline-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  contracts:
+    name: Contracts and observability
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out public source
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - name: Set up Node
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24'
+          package-manager-cache: false
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.14'
+      - name: Install locked development dependencies
+        working-directory: tools/contracts-ajv
+        run: |
+          npm ci --ignore-scripts
+          python -m venv .venv
+          .venv/bin/python -m pip install --disable-pip-version-check --require-hashes --only-binary=:all: -r python-requirements.lock
+      - name: Ajv self-tests and schema fixtures
+        working-directory: tools/contracts-ajv
+        run: |
+          npm test
+          npm run validate
+      - name: Differential checks with explicit known format exception
+        working-directory: tools/contracts-ajv
+        run: npm run differential
+      - name: Pure observability model
+        working-directory: observability
+        run: python -B -m unittest discover -s tests -p test_contract.py -v
+      - name: PHP syntax and offline formatter checks
+        run: |
+          php -n --version
+          php -n -r 'exit(PHP_VERSION_ID >= 80100 ? 0 : 1);'
+          php -n -l observability/php/record.php
+          php -n -l observability/tests/verify_php.php
+          php -n observability/tests/verify_php.php
+      - name: npm vulnerability audit
+        working-directory: tools/contracts-ajv
+        run: npm audit --audit-level=high

@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: GPL-3.0-only
+# Copyright (C) 2026 Runbrace Contributors
+
 """Small closed contract; keep in sync with contracts/request-v1.schema.json."""
 
 import hashlib

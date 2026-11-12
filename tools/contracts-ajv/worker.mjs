@@ -1,3 +1,8 @@
+/*
+ * SPDX-License-Identifier: GPL-3.0-only
+ * Copyright (C) 2026 Runbrace Contributors
+ */
+
 import fs from 'node:fs';
 import path from 'node:path';
 import {spawnSync} from 'node:child_process';

@@ -1,3 +1,8 @@
+/*
+ * SPDX-License-Identifier: GPL-3.0-only
+ * Copyright (C) 2026 Runbrace Contributors
+ */
+
 // Conservative transport subset. The original Buffer remains the evidence.
 export const LIMITS = Object.freeze({bytes: 65536, depth: 48, tokens: 20000,
   schemas: 32, fixtures: 512, totalBytes: 4 * 1024 * 1024, diagnostics: 8});

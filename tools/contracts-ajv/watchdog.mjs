@@ -1,3 +1,8 @@
+/*
+ * SPDX-License-Identifier: GPL-3.0-only
+ * Copyright (C) 2026 Runbrace Contributors
+ */
+
 import {spawnSync} from 'node:child_process';
 
 // Fixed local worker in the CLI; alternate argv exists only for controlled tests.

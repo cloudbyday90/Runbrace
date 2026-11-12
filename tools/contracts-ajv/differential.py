@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: GPL-3.0-only
+# Copyright (C) 2026 Runbrace Contributors
+
 """Offline semantic comparison. Called only with pre-screened synthetic cases."""
 import base64
 import hashlib

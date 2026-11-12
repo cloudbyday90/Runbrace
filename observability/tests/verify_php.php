@@ -1,4 +1,9 @@
 <?php
+/*
+ * SPDX-License-Identifier: GPL-3.0-only
+ * Copyright (C) 2026 Runbrace Contributors
+ */
+
 declare(strict_types=1);
 // Offline only. Run: php -n observability/tests/verify_php.php
 require __DIR__ . '/../php/record.php';

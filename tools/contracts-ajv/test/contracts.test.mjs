@@ -1,3 +1,8 @@
+/*
+ * SPDX-License-Identifier: GPL-3.0-only
+ * Copyright (C) 2026 Runbrace Contributors
+ */
+
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';

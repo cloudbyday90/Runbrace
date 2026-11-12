@@ -20,10 +20,10 @@ Numbers are budget allowances/assumptions, not observed peaks or PostgreSQL hard
 
 ## Required arithmetic checks
 
-- Core total = database limit + replicas x app limit. App component allowances plus app headroom equal its limit.
+- Core total = database limit + replicas × app limit. App component allowances plus app headroom equal its limit.
 - DB component estimate follows the documented formula, including every configured client slot's assumed private overhead, modeled query activity, autovacuum, maintenance, temp buffers, other/cache, and headroom.
-- Model query slots = replicas x sum(active app SQL limits) + the declared non-app memory-intensive SQL slots. Each active class stays within its pool capacity.
-- Ordinary client demand = replicas x sum(pool maxima) + private operational slots. This must fit max_connections minus superuser/other reserved slots; reserved connections cannot be borrowed silently.
+- Model query slots = replicas × sum(active app SQL limits) + the declared non-app memory-intensive SQL slots. Each active class stays within its pool capacity.
+- Ordinary client demand = replicas × sum(pool maxima) + private operational slots. This must fit max_connections minus superuser/other reserved slots; reserved connections cannot be borrowed silently.
 - Headroom and other allowances stay positive, and the illustrative DB headroom remains at least 25% of its limit. This margin is a project modeling choice, not proof of safety.
 - Changes to work_mem, hash scaling, participants, connections, replicas, workers, build concurrency, caches, or app credits require recomputation; a syntactically valid worksheet can still be inconsistent or underestimate real allocation.
 

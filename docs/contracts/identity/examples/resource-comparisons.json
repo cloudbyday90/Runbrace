@@ -240,7 +240,7 @@
         "generation_id": "019a6670-0000-7000-8000-000000000202",
         "entity": {
           "kind": "dag_run",
-          "id": "�",
+          "id": "é",
           "parents": [
             {
               "kind": "dag",
@@ -254,7 +254,7 @@
         "generation_id": "019a6670-0000-7000-8000-000000000202",
         "entity": {
           "kind": "dag_run",
-          "id": "e'",
+          "id": "é",
           "parents": [
             {
               "kind": "dag",

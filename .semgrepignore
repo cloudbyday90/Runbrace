@@ -1,0 +1,6 @@
+# SPDX-License-Identifier: GPL-3.0-only
+# Explicit policy replaces default test-directory exclusions.
+.git/
+node_modules/
+.venv/
+security/php-guardrails.php

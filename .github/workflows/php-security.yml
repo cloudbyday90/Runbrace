@@ -1,0 +1,49 @@
+# SPDX-License-Identifier: GPL-3.0-only
+name: PHP security guardrails
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: '41 6 * * 1'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  php-security:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      # Semgrep CE 1.185.0; immutable official multi-platform image.
+      SEMGREP_IMAGE: semgrep/semgrep@sha256:67518c174185a2043fdbed16c70631b79209499b3671178e7194379b48295a0d
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - name: Fetch pinned scanner
+        run: docker pull "$SEMGREP_IMAGE"
+      - name: Test rules, then scan PHP without network access
+        shell: bash
+        run: |
+          set -euo pipefail
+          scan() {
+            docker run --rm --network none --read-only --cap-drop ALL \
+              --security-opt no-new-privileges --user "$(id -u):$(id -g)" \
+              --tmpfs /tmp:rw,nosuid,size=512m \
+              -e HOME=/tmp -e XDG_CONFIG_HOME=/tmp/config \
+              -e SEMGREP_SETTINGS_FILE=/tmp/settings.yml -e SEMGREP_LOG_FILE=/tmp/semgrep.log \
+              -e SEMGREP_SEND_METRICS=off -e SEMGREP_ENABLE_VERSION_CHECK=0 \
+              -v "$GITHUB_WORKSPACE:/src:ro" -w /src "$SEMGREP_IMAGE" semgrep scan "$@"
+          }
+          scan --test --config security/php-guardrails.yml security/php-guardrails.php --metrics off --disable-version-check
+          scan --project-root . --oss-only --config security/php-guardrails.yml --metrics off --disable-version-check \
+            --strict --error --disable-nosem --include '*.php' --json . > "$RUNNER_TEMP/php-security.json"
+          python - "$RUNNER_TEMP/php-security.json" <<'PY'
+          import json, sys
+          report = json.load(open(sys.argv[1]))
+          scanned = set(report["paths"]["scanned"])
+          required = {"observability/php/record.php", "observability/tests/verify_php.php"}
+          assert required <= scanned, f"Missing PHP scan targets: {required - scanned}"
+          assert not report["errors"], report["errors"]
+          print(f"PHP guardrails: {len(scanned)} files, {len(report['results'])} findings")
+          PY

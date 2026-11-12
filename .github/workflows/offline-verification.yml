@@ -37,7 +37,7 @@ jobs:
         run: |
           npm ci --ignore-scripts
           python -m venv .venv
-          .venv/bin/python -m pip install --disable-pip-version-check --require-hashes --only-binary=:all: -r python-requirements.lock
+          .venv/bin/python -m pip install --disable-pip-version-check --require-hashes --only-binary=:all: -r requirements.txt
       - name: Ajv self-tests and schema fixtures
         working-directory: tools/contracts-ajv
         run: |

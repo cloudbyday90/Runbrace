@@ -1,0 +1,32 @@
+# Version updates complement GitHub's separately enabled security updates.
+# No auto-merge, ignored vulnerabilities, private registries, or credentials.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /tools/contracts-ajv
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    groups:
+      npm-minor-patch:
+        applies-to: version-updates
+        patterns: ["*"]
+        update-types: [minor, patch]
+  - package-ecosystem: pip
+    directory: /tools/contracts-ajv
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    groups:
+      python-minor-patch:
+        applies-to: version-updates
+        patterns: ["*"]
+        update-types: [minor, patch]
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5

@@ -1,3 +1,8 @@
+/*
+ * SPDX-License-Identifier: GPL-3.0-only
+ * Copyright (C) 2026 Runbrace Contributors
+ */
+
 // Parent watchdog: synchronous schema compilation/regex work cannot evade it.
 import {HERE} from './registry.mjs';
 import {runBounded} from './watchdog.mjs';

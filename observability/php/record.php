@@ -1,4 +1,9 @@
 <?php
+/*
+ * SPDX-License-Identifier: GPL-3.0-only
+ * Copyright (C) 2026 Runbrace Contributors
+ */
+
 declare(strict_types=1);
 namespace Runbrace\Observability\Offline;
 

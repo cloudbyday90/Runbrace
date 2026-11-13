@@ -1,3 +1,6 @@
+# SPDX-License-Identifier: GPL-3.0-only
+# Copyright (C) 2026 Runbrace Contributors
+
 """Offline contract oracle and virtual export model. NOT a Runbrace runtime adapter.
 
 No network, files, subprocesses, SDK, ledger imports or real sleeping. Queue failure

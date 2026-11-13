@@ -1,3 +1,8 @@
+/*
+ * SPDX-License-Identifier: GPL-3.0-only
+ * Copyright (C) 2026 Runbrace Contributors
+ */
+
 import {Refusal, LIMITS} from './parse.mjs';
 import {RESULT_ID, STATUS_ID} from './registry.mjs';
 

@@ -46,9 +46,12 @@ jobs:
       - name: Differential checks with explicit known format exception
         working-directory: tools/contracts-ajv
         run: npm run differential
-      - name: Pure observability model
+      - name: Discover observability Python tests
         working-directory: observability
-        run: python -B -m unittest discover -s tests -p test_contract.py -v
+        run: python -B -m unittest discover -s tests -p 'test_*.py' -v
+      - name: Discover observability Python tests (optimized)
+        working-directory: observability
+        run: python -B -O -m unittest discover -s tests -p 'test_*.py' -v
       - name: PHP syntax and offline formatter checks
         run: |
           php -n --version

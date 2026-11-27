@@ -59,3 +59,35 @@ jobs:
       - name: npm vulnerability audit
         working-directory: tools/contracts-ajv
         run: npm audit --audit-level=high
+
+  differential-windows:
+    name: Differential contracts (Windows)
+    runs-on: windows-2025
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: tools/contracts-ajv
+    steps:
+      - name: Check out public source
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - name: Set up Node
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24'
+          package-manager-cache: false
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.14'
+      - name: Install locked Node dependencies
+        run: npm.cmd ci --ignore-scripts --no-audit --no-fund
+      - name: Create the Python virtual environment
+        run: python -m venv .venv
+      - name: Install hash-locked Python dependencies
+        run: >-
+          .\.venv\Scripts\python.exe -m pip --isolated install --disable-pip-version-check
+          --require-hashes --only-binary=:all: -r requirements.txt
+      - name: Differential checks with explicit known format exception
+        run: npm.cmd run differential

@@ -1,0 +1,11 @@
+# The public differential validates or reports byte hashes for these inputs.
+/compatibility-runtime/contracts/**/*.json text eol=lf
+/docs/contracts/**/*.json text eol=lf
+/tools/contracts-ajv/*.mjs text eol=lf
+/tools/contracts-ajv/test/*.test.mjs text eol=lf
+/tools/contracts-ajv/differential.py text eol=lf
+/tools/contracts-ajv/manifest.json text eol=lf
+/tools/contracts-ajv/package.json text eol=lf
+/tools/contracts-ajv/package-lock.json text eol=lf
+/tools/contracts-ajv/python-requirements.lock text eol=lf
+/tools/contracts-ajv/requirements.txt text eol=lf
